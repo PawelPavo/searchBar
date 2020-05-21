@@ -1,19 +1,19 @@
 import * as React from 'react';
 import { IBlogs } from '../utils/interfaces';
 import { Link } from 'react-router-dom';
-import { FaEdit, } from 'react-icons/fa';
-import moment from 'moment';
+import { FaEye, } from 'react-icons/fa';
+import * as moment from 'moment';
 
 const BlogCard: React.SFC<BlogCardProps> = props => {
 
     return (
         <>
-            <div className="card my-5 shadow border">
+            <div className="card my-5 shadow border-0">
                 <div className="row no-gutters">
                     <div className="col-md-8">
                         <div className="card-body">
                             <div className="text-center mb-5">
-                                <Link className="btn btn-block w-75 btn-outline-primary btn-sm mx-auto" to={`${props.blog.id}/details`}><FaEdit /> View Blog</Link>
+                                <Link className="btn btn-block w-75 btn-outline-primary btn-sm mx-auto bg-light border-0 shadow-sm" to={`${props.blog.id}/details`}><FaEye /> View Blog</Link>
                             </div>
                             <div>
                                 <small className="text-muted">{moment(props.blog.created_at).format('MMM Do YYYY')}</small>

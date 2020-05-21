@@ -1,14 +1,18 @@
 import * as React from 'react';
 import Navbah from '../components/Navbah';
 import { useState } from 'react';
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js'
 import { CardNumberElement, CardExpiryElement, CardCvcElement } from '@stripe/react-stripe-js'
+import { getPathText } from '../utils/pathing';
+import { Helmet } from 'react-helmet';
 
 
 
 const Donate: React.FC<IDonateProps> = props => {
 
+    const { pathname } = useLocation()
+    const navbarText = getPathText(pathname)
     const [name, setName] = useState<string>('');
     const [amount, setAmount] = useState<string>('10');
     const elements = useElements();
@@ -20,17 +24,17 @@ const Donate: React.FC<IDonateProps> = props => {
         try {
             let cardNumber = elements.getElement(CardNumberElement);
             let { token } = await stripe.createToken(cardNumber, { name })
-            await fetch ('/api/donate', {
+            await fetch('/api/donate', {
                 method: 'POST',
                 headers: {
                     'Content-type': 'application/json'
                 },
-                body: JSON.stringify({token, amount})
+                body: JSON.stringify({ token, amount })
             })
             //put sweet alert
             history.push('/');
             console.log(token)
-            
+
         } catch (error) {
             console.log(error)
         }
@@ -38,8 +42,13 @@ const Donate: React.FC<IDonateProps> = props => {
 
     return (
         <main className="container">
-            <Navbah />
+            <Helmet>
+                <title>Donate</title>
+            </Helmet>
 
+
+            <Navbah />
+            <h2 className="text-center my-4 text-muted">{navbarText}</h2>
             <div className="row justify-content-center mt-5">
                 Please enter donation amount
             </div>

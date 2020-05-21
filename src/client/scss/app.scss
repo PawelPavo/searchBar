@@ -52,25 +52,23 @@ $theme-colors: (
     }
 }
 
-.tags {
-    position: relative;
-    display: flex !important;
-    justify-content: space-evenly;
-    align-items: center;
+.blog-btn {
+ padding-top: 250px;
+ position: fixed !important;
 }
 
-.tags2 {
-    position: relative;
-    display: flex !important;
-    justify-content: space-evenly;
-    align-items: center;
+@media screen and (max-width: 480px) {
+    .blog-btn {
+        padding-top: 0px;
+        margin-left: 75px;
+        position: relative !important;
+    }
 }
 
-.tags2:hover {
-    color: #0091ea;
-    display: block;
-    transition: 0.3s;
+@media screen and (max-width: 480px){
+    .mobile-nav {
+        font-size: 12px;
+    }
 }
-
 
 @import '../../../node_modules/bootstrap/scss/bootstrap.scss';

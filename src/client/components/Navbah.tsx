@@ -7,7 +7,7 @@ const Navbah: React.FC<NavbahProps> = (props) => {
 
     return (
         <>
-            <section className="row my-2">
+            <section className="row my-2 mobile-nav">
                 <div className="col-12">
                     <nav className="nav justify-content-around p-3 border-bottom border-secondary">
                         <NavLink exact to="/" activeClassName="text-secondary"> Home  </NavLink>
@@ -16,7 +16,6 @@ const Navbah: React.FC<NavbahProps> = (props) => {
                         <NavLink exact to="/contact" activeClassName="text-secondary">  Contact Me </NavLink>
                         <NavLink exact to="/donate" activeClassName="text-secondary">  Donate  </NavLink>
                         <NavLink exact to="/login" activeClassName="text-secondary"> Login </NavLink>
-
                         <span onClick={() => setShow(!show)} className="text-success"> Search </span>
                     </nav>
                     <input

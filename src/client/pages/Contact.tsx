@@ -1,10 +1,17 @@
 import * as React from 'react';
 import Navbah from '../components/Navbah';
 import { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
+import { getPathText } from '../utils/pathing';
+import { Helmet } from 'react-helmet';
 
 const Contact: React.FC<IContactProps> = () => {
+
+	const { pathname } = useLocation()
+	const navbarText = getPathText(pathname)
+
 	let history = useHistory();
+	
 	const [email, setEmail] = useState<string>('')
 	const [subject, setSubject] = useState<string>('')
 	const [message, setMessage] = useState<string>('')
@@ -34,9 +41,13 @@ const Contact: React.FC<IContactProps> = () => {
 
 	return (
 		<main className="container">
+			<Helmet>
+				<title>{navbarText}</title>
+			</Helmet>
+
 			<Navbah />
 
-			<h2 className="text-center my-4 text-muted">Contact Me</h2>
+			<h2 className="text-center my-4 text-muted">{navbarText}</h2>
 
 			<p className="text-center mx-auto mb-3">Do you have any questions? Please do not hesitate to contact me directly. I will get back to you as soon as I can.</p>
 

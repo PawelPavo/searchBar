@@ -23,6 +23,7 @@
     "@types/mysql": "^2.15.11",
     "@types/node-cron": "^2.0.3",
     "@types/react": "^16.9.35",
+    "@types/react-bootstrap": "^1.0.1",
     "@types/react-dom": "^16.9.8",
     "@types/react-router": "^5.1.7",
     "@types/react-router-dom": "^5.1.5",
@@ -31,6 +32,8 @@
     "css-loader": "^1.0.1",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "github-markdown-css": "^4.0.0",
+    "helmet": "^3.22.0",
     "mailgun-js": "^0.22.0",
     "moment": "^2.25.3",
     "morgan": "^1.10.0",
@@ -38,8 +41,11 @@
     "node-cron": "^2.0.3",
     "node-sass": "^4.14.1",
     "react": "^16.12.0",
+    "react-bootstrap": "^1.0.1",
     "react-dom": "^16.12.0",
+    "react-helmet": "^6.0.0",
     "react-icons": "^3.10.0",
+    "react-markdown": "^4.3.1",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
     "sass-loader": "^7.3.1",
@@ -52,6 +58,7 @@
     "webpack-node-externals": "^1.7.2"
   },
   "devDependencies": {
+    "@types/react-helmet": "^6.0.0",
     "nodemon": "^1.19.4",
     "npm-run-all": "^4.1.3"
   }

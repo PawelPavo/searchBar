@@ -7,3 +7,7 @@ export interface IBlogs {
     created_at: Date;
     name: string;
 };
+
+export interface IHeaders {
+    [key: string]: string;
+}
