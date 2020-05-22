@@ -12,7 +12,6 @@ import Blog from './pages/Blog';
 import Details from './pages/Details';
 import NewBlog from './pages/NewBlog';
 import Register from './pages/Register';
-import BlogDetailsCard from './components/BlogDetailsCard';
 
 const stripePromise = loadStripe('pk_test_MRMivgTfwcT3UfCgH8aCjiqW00AHT65rhC');
 
@@ -46,9 +45,9 @@ const App: React.FC<IAppProps> = () => {
 				<Route exact path="/register">
 					<Register />
 				</Route>
-				<Route exact path="/:id/details"
-					render={(props) => <Details {...props} />}
-					/>
+				<Route exact path="/:id/details">
+					<Details />
+				</Route>
 			</Switch>
 		</BrowserRouter>
 	);

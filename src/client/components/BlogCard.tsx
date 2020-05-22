@@ -13,7 +13,7 @@ const BlogCard: React.SFC<BlogCardProps> = props => {
                     <div className="col-md-8">
                         <div className="card-body">
                             <div className="text-center mb-5">
-                                <Link className="btn btn-block w-75 btn-outline-primary btn-sm mx-auto bg-light border-0 shadow-sm" to={`${props.blog.id}/details`}><FaEye /> View Blog</Link>
+                                <Link className="btn btn-outline-primary btn-block mt-3 w-75 mx-auto" to={`${props.blog.id}/details`}><FaEye /> View Blog</Link>
                             </div>
                             <div>
                                 <small className="text-muted">{moment(props.blog.created_at).format('MMM Do YYYY')}</small>

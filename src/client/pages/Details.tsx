@@ -1,18 +1,17 @@
 import * as React from 'react';
 import Navbah from '../components/Navbah';
-import { useLocation, RouteComponentProps } from 'react-router-dom';
+import { useLocation, RouteComponentProps, useParams } from 'react-router-dom';
 import { getPathText } from '../utils/pathing';
 import { Helmet } from 'react-helmet';
 import { IBlogs } from '../utils/interfaces';
 import { useEffect, useState } from 'react';
 import BlogDetailsCard from '../components/BlogDetailsCard'
+import blogs from '../../server/db/queries/blogs';
 
 
-export interface DetailsProps extends RouteComponentProps<{ id: string }> { }
+export interface DetailsProps { }
 
 const Details: React.SFC<DetailsProps> = props => {
-    const { pathname } = useLocation()
-    const navbarText = getPathText(pathname)
     const [blog, setBlog] = useState<IBlogs>({
         id: 0,
         title: '',
@@ -23,9 +22,12 @@ const Details: React.SFC<DetailsProps> = props => {
         name: '',
     });
 
+    const {id} = useParams();
+
+
     useEffect(() => {
         (async () => {
-            let blogid = props.match.params.id
+            let blogid = id
             try {
                 let res = await fetch(`/api/blogs/${blogid}`);
                 let blog = await res.json()
@@ -35,7 +37,7 @@ const Details: React.SFC<DetailsProps> = props => {
                 console.log({ error: 'Can not get the detail info' })
             }
         })()
-    }, [props.match.params.id]);
+    }, [id]);
 
     return (
         <main className="container-fluid">
@@ -44,13 +46,11 @@ const Details: React.SFC<DetailsProps> = props => {
             </Helmet>
             <Navbah />
             <div className="text-center text-muted">
-                <h2 >Blog Details</h2>
+                <h2 className="text-center mt-4 text-muted">{blog.title}</h2>
             </div>
-            <section className="justify-content-center mt-5">
-                
-                    <BlogDetailsCard blogs={blog} />
-              
-            </section>
+            <div className="row justify-content-center">
+                <BlogDetailsCard blogs={blog} />
+            </div>
         </main>
     )
 }

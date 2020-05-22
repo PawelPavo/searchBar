@@ -13,7 +13,7 @@ const NewBlog: React.FC<NewBlogProps> = props => {
     const [content, setContent] = useState<string>('')
     const [title, setTitle] = useState<string>('')
     const [image_url, setImage_url] = useState<string>('')
-    let history = useHistory();
+    const history = useHistory();
 
     const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
