@@ -21,3 +21,16 @@ export interface TUsers {
     role?: string;
     created_at?: Date;
 }
+
+export interface TTokens {
+    id?: number;
+    userid?: number;
+    uniq?: string;
+    jwt?: string;
+    created_at?: Date;
+}
+
+export interface DBResp {
+    affectedRows?: number;
+    insertId?: number;
+}

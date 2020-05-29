@@ -1,8 +1,10 @@
 import * as React from 'react';
 import * as moment from 'moment';
+import Navbah from './Navbah';
 import { Link } from 'react-router-dom';
 import { IBlogs } from '../utils/interfaces';
 import { FaUndo, } from 'react-icons/fa';
+
 
 
 import * as ReactMarkdown from 'react-markdown';
@@ -23,20 +25,23 @@ const BlogDetailsCard: React.SFC<BlogDetailsCardProps> = ({ blogs }) => {
                     </div>
                     <div className="card-body">
                         <div className="col-md-4 mx-auto my-2">
-                            <img src={blogs.image_url} className="card-img image-fluid" alt="..." width="300" height="275" />
+                            <img src={blogs.image_url} className="card-img image-fluid" alt="..." width="auto" height="auto" />
                         </div>
                         <div className="col">
-                            <div className="card overflow-auto" style={{ minHeight: '302px' }}>
+                            <div className="card overflow-auto border-0" style={{ minHeight: '302px' }}>
                                 <div className="markdown-body">
+
                                     <ReactMarkdown source={blogs.content} />
+
                                 </div>
                             </div>
                         </div>
                         <p className="text-muted text-center mt-3">{moment(blogs.created_at).format('MMM Do YYYY')}</p>
-                        <div className="d-flex justify-content-center">
-                            <Link to="/blog" className="btn btn-outline-primary btn-lg btn-block mt-3 w-75 mx-auto"> <FaUndo /> Back To All Blogs</Link>
-                        </div>
                     </div>
+                </div>
+                <div className="row justify-content-between mb-5">
+                    <Link className="btn btn-outline-warning btn-block mt-3 w-25 mx-auto shadow" to={`/${blogs.id}/edit`}>Edit</Link>
+                    <Link to="/blog" className="btn btn-outline-primary btn-block mt-3 w-25 mx-auto shadow"> <FaUndo />  All Blogs</Link>
                 </div>
             </div>
         </>

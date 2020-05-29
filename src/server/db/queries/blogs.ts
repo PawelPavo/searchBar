@@ -7,8 +7,15 @@ const one = (id: string) => Query<BlogsT[]>('SELECT blogs.*, authors.name FROM b
 
 const insert = (title:string, content:string, authorid:number, image:string) => Query('INSERT INTO blogs (title, content, authorid, image_url) VALUES(?)',[[title, content, authorid, image]] )
 
+const update = (title:string, content:string, image:string, id:number) => Query('UPDATE blogs SET title = ?, content = ?, image_url = ? WHERE id = ?', [title, content, image, id])
+
+const destroy = (id:number) => Query('DELETE FROM blogs WHERE id = ?', [id])
+
+
 export default {
     all,
     one,
-    insert
+    insert,
+    update,
+    destroy
 }

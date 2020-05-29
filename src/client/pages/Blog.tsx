@@ -22,7 +22,7 @@ const Blogs: React.SFC<BlogsProps> = () => {
         let blogs = await res.json();
         setBlogs(blogs);
       } catch (error) {
-          console.log(error)
+        console.log(error)
       }
     })()
   }, []);
@@ -37,7 +37,6 @@ const Blogs: React.SFC<BlogsProps> = () => {
 
       <div>
         <h2 className="text-center my-4 text-muted">{navbarText}</h2>
-
         <section className="row mt-3 justify-content-end">
           <div className="col-md-4">
             <div className="btn-group-vertical blog-btn">

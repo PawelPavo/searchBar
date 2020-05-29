@@ -18,5 +18,9 @@ export default {
         domain: process.env.DOMAIN,
         admin: process.env.ADMIN_EMAIL,
         stripe: process.env.STRIPE,
+    },
+    jwt: {
+        secret: process.env.JWT_SECRET,
+        expires: process.env.JWT_EXPIRES
     }
 };

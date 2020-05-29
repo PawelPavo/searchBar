@@ -7,6 +7,8 @@ import { IBlogs } from '../utils/interfaces';
 import { useEffect, useState } from 'react';
 import BlogDetailsCard from '../components/BlogDetailsCard'
 import blogs from '../../server/db/queries/blogs';
+import Typist from 'react-typist';
+
 
 
 export interface DetailsProps { }
@@ -24,7 +26,6 @@ const Details: React.SFC<DetailsProps> = props => {
 
     const {id} = useParams();
 
-
     useEffect(() => {
         (async () => {
             let blogid = id
@@ -32,7 +33,6 @@ const Details: React.SFC<DetailsProps> = props => {
                 let res = await fetch(`/api/blogs/${blogid}`);
                 let blog = await res.json()
                 setBlog(blog)
-                console.log(res)
             } catch (error) {
                 console.log({ error: 'Can not get the detail info' })
             }
@@ -40,7 +40,7 @@ const Details: React.SFC<DetailsProps> = props => {
     }, [id]);
 
     return (
-        <main className="container-fluid">
+        <main className="container">
             <Helmet>
                 <title>Blog Details</title>
             </Helmet>

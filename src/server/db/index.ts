@@ -19,7 +19,12 @@ export const Query = <T=any> (query?: string, values?:any) => {
 }
 
 import blogs from './queries/blogs'
+import tokens from './queries/tokens'
+import users from './queries/users';
+
 
 export default {
-    blogs
+    blogs,
+    tokens,
+    users
 };

@@ -4,14 +4,15 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js'
 import Home from './pages/Home';
-import Login from './pages/Login';
+import Login from './pages/auth/Login';
 import Profile from './pages/Profile';
 import Contact from './pages/Contact';
 import Donate from './pages/Donate';
 import Blog from './pages/Blog';
 import Details from './pages/Details';
 import NewBlog from './pages/NewBlog';
-import Register from './pages/Register';
+import Register from './pages/auth/Register';
+import Edit from './components/Edit';
 
 const stripePromise = loadStripe('pk_test_MRMivgTfwcT3UfCgH8aCjiqW00AHT65rhC');
 
@@ -47,6 +48,9 @@ const App: React.FC<IAppProps> = () => {
 				</Route>
 				<Route exact path="/:id/details">
 					<Details />
+				</Route>
+				<Route exact path="/:id/edit">
+					<Edit />
 				</Route>
 			</Switch>
 		</BrowserRouter>

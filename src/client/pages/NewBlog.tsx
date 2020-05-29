@@ -42,12 +42,14 @@ const NewBlog: React.FC<NewBlogProps> = props => {
                 <div className="col-md-12">
                     <form className="form-group p-3 rounded border-0 shadow bg-light">
                         <div className="col-10 mx-auto">
-
-                            <input className="form-control mb-5 border-primary border-top-0 border-left-0 border-right-0 bg-light rounded-0" type="text" placeholder="Enter title ..."
+                            <input className="form-control mb-5 border-primary border-top-0 border-left-0 border-right-0 bg-light rounded-0" 
+                            type="text" 
+                            placeholder="Enter title ..."
                                 value={title}
                                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setTitle(e.target.value)}
                             />
-                            <input className="form-control mb-5 border-primary border-top-0 border-left-0 border-right-0 bg-light rounded-0" type="text" placeholder="Enter image URL ..."
+                            <input className="form-control mb-5 border-primary border-top-0 border-left-0 border-right-0 bg-light rounded-0" 
+                            type="text" placeholder="Enter image URL ..."
                                 value={image_url}
                                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setImage_url(e.target.value)}
                             />
