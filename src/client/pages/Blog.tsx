@@ -7,6 +7,7 @@ import { Link, useLocation, NavLink } from 'react-router-dom';
 import { FaFeather, FaUserPlus } from 'react-icons/fa';
 import { getPathText } from '../utils/pathing';
 import { Helmet } from 'react-helmet';
+import apiServices from '../utils/api-services';
 
 
 const Blogs: React.SFC<BlogsProps> = () => {
@@ -18,7 +19,7 @@ const Blogs: React.SFC<BlogsProps> = () => {
   useEffect(() => {
     (async () => {
       try {
-        let res = await fetch('/api/blogs');
+        let res = await fetch ('/api/blogs');
         let blogs = await res.json();
         setBlogs(blogs);
       } catch (error) {
@@ -52,7 +53,6 @@ const Blogs: React.SFC<BlogsProps> = () => {
           </div>
         </section>
       </div>
-
     </main>
   )
 }

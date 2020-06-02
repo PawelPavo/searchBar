@@ -6,9 +6,7 @@ import { Helmet } from 'react-helmet';
 import { IBlogs } from '../utils/interfaces';
 import { useState, useEffect } from 'react';
 import { FaTimes, FaCheck } from 'react-icons/fa';
-
-
-
+import apiServices from '../utils/api-services';
 
 const Edit: React.FC<IEditProps> = () => {
     const { id } = useParams();
@@ -48,11 +46,7 @@ const Edit: React.FC<IEditProps> = () => {
         e.preventDefault();
         let blogid = id;
         try {
-            await fetch(`/api/blogs/${blogid}`, {
-                method: 'PUT',
-                headers: { "Content-type": "application/json" },
-                body: JSON.stringify({ title, content, image_url })
-            });
+            await apiServices(`/api/blogs/${blogid}`, 'PUT', { title, content, image_url })
         } catch (error) {
             console.log(error);
         }
@@ -61,9 +55,10 @@ const Edit: React.FC<IEditProps> = () => {
 
     const deleteBlog = async (id: number) => {
         try {
-            await fetch(`/api/blogs/${id}`, {
-                method: 'DELETE'
-            });
+            await apiServices(`/api/blogs/${id}`, 'DELETE')
+            // await fetch(`/api/blogs/${id}`, {
+            //     method: 'DELETE'
+            // });
             Swal.fire({
                 icon: 'success',
                 title: 'Success',

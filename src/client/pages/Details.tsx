@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Navbah from '../components/Navbah';
-import { useLocation, RouteComponentProps, useParams } from 'react-router-dom';
+import { useLocation, RouteComponentProps, useParams, useHistory } from 'react-router-dom';
 import { getPathText } from '../utils/pathing';
 import { Helmet } from 'react-helmet';
 import { IBlogs } from '../utils/interfaces';
@@ -14,6 +14,7 @@ import Typist from 'react-typist';
 export interface DetailsProps { }
 
 const Details: React.SFC<DetailsProps> = props => {
+
     const [blog, setBlog] = useState<IBlogs>({
         id: 0,
         title: '',
@@ -24,19 +25,25 @@ const Details: React.SFC<DetailsProps> = props => {
         name: '',
     });
 
-    const {id} = useParams();
-
+    const { id } = useParams();
+    const history = useHistory()
     useEffect(() => {
-        (async () => {
-            let blogid = id
-            try {
-                let res = await fetch(`/api/blogs/${blogid}`);
-                let blog = await res.json()
-                setBlog(blog)
-            } catch (error) {
-                console.log({ error: 'Can not get the detail info' })
-            }
-        })()
+        const role = localStorage.getItem('role')
+        if (role !== 'guest') {
+            history.push({ pathname: '/login', state: { msg: 'You must be logged in to read this blog' } })
+        } else {
+
+            (async () => {
+                let blogid = id
+                try {
+                    let res = await fetch(`/api/blogs/${blogid}`);
+                    let blog = await res.json()
+                    setBlog(blog)
+                } catch (error) {
+                    console.log({ error: 'Can not get the detail info' })
+                }
+            })()
+        }
     }, [id]);
 
     return (

@@ -1,15 +1,46 @@
 import * as React from 'react';
 import Navbah from '../../components/Navbah';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useHistory } from 'react-router-dom';
 import { getPathText } from '../../utils/pathing';
 import { Helmet } from 'react-helmet';
+import { useState, useEffect } from 'react';
+import { setStorage } from '../../utils/api-services';
 
 const Login: React.FC<ILoginProps> = () => {
-
+    const { state } = useLocation<{msg: string}>();
+    const history = useHistory();
     const { pathname } = useLocation()
     const navbarText = getPathText(pathname)
-    const login = () => {
-        console.log('You are Logged in!')
+    const [error, setError] = React.useState<string>('')
+    const [values, setValues] = useState<{ [key: string]: string }>({
+        email: 'NewEmail@newEmail.com',
+        password: 'NewPassword'
+    })
+
+    useEffect(() => {
+        setError(state?.msg)
+    }, [])
+
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        e.persist();
+        setValues((prevState) => ({ ...prevState, [e.target.name]: e.target.value }))
+    }
+
+    const login = async () => {
+        const res = await fetch('/auth/login', {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify(values)
+        })
+        if (res.ok) {
+            const info = await res.json();
+            setStorage(info.token, info.role)
+            history.push('/blog')
+            console.log(info);
+        }
     };
 
     return (
@@ -26,8 +57,8 @@ const Login: React.FC<ILoginProps> = () => {
                         <div className="form-group">
                             <label >Email address</label>
                             <input
-                                value={null}
-                                onChange={null}
+                                value={values.email}
+                                onChange={handleChange}
                                 type="email"
                                 name="email"
                                 className="form-control"
@@ -38,8 +69,8 @@ const Login: React.FC<ILoginProps> = () => {
                         <div className="form-group">
                             <label >Password</label>
                             <input
-                                value={null}
-                                onChange={null}
+                                value={values.password || ''}
+                                onChange={handleChange}
                                 type="password"
                                 name='password'
                                 className="form-control"
@@ -50,6 +81,11 @@ const Login: React.FC<ILoginProps> = () => {
                             <div onClick={login} className="btn btn-outline-primary block w-50 mx-auto">Login!</div>
                         </div>
                     </form>
+
+                    {error && <div className="alert alert-warning text-center" role="alert">
+                        {error}
+                    </div>}
+
                 </div>
             </div>
         </main>

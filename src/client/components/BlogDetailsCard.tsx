@@ -1,12 +1,8 @@
 import * as React from 'react';
 import * as moment from 'moment';
-import Navbah from './Navbah';
-import { Link } from 'react-router-dom';
+import { Link} from 'react-router-dom';
 import { IBlogs } from '../utils/interfaces';
 import { FaUndo, } from 'react-icons/fa';
-
-
-
 import * as ReactMarkdown from 'react-markdown';
 import 'github-markdown-css'
 

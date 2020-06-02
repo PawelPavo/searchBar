@@ -6,6 +6,7 @@ import { Helmet } from 'react-helmet';
 import { useState, useEffect } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import 'github-markdown-css'
+import apiServices from '../utils/api-services';
 
 const NewBlog: React.FC<NewBlogProps> = props => {
     const { pathname } = useLocation()
@@ -18,11 +19,7 @@ const NewBlog: React.FC<NewBlogProps> = props => {
     const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         try {
-            await fetch('/api/blogs', {
-                method: 'POST',
-                headers: { "Content-type": "application/json" },
-                body: JSON.stringify({ title, content, authorid: 3, image_url })
-            });
+            await apiServices('/api/blogs', 'POST', { title, content, authorid: 3, image_url })
             history.push('/blog');
         } catch (error) {
             console.log(error);

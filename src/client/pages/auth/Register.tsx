@@ -4,16 +4,35 @@ import { useLocation } from 'react-router-dom';
 import { getPathText } from '../../utils/pathing';
 import { Helmet } from 'react-helmet';
 
-const Register: React.FC<IRegisterProps> = () => {
+const Register: React.FC<IRegisterProps> = (props) => {
 
     const { pathname } = useLocation()
     const navbarText = getPathText(pathname)
-    const register = () => {
-        console.log('Registered!!')
+    const [values, setValues] = React.useState<{ [key: string]: string }>({});
+
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        e.persist();
+        setValues((prevState) => ({ ...prevState, [e.target.name]: e.target.value }))
     };
 
+    const handleRegister = async () => {
+        const res = await fetch('/auth/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(values)
+        });
+        if (res.ok) {
+            const info = await res.json();
+            localStorage.setItem('token', info.token);
+            localStorage.setItem('role', info.role);
+        }
+    }
+
     return (
-<main className="container">
+        <main className="container">
             <Helmet>
                 <title>{navbarText}</title>
             </Helmet>
@@ -27,8 +46,8 @@ const Register: React.FC<IRegisterProps> = () => {
                         <div className="form-group">
                             <label >Email address</label>
                             <input
-                                value={null}
-                                onChange={null}
+                                value={values.email || ''}
+                                onChange={handleChange}
                                 type="email"
                                 name="email"
                                 className="form-control"
@@ -39,8 +58,8 @@ const Register: React.FC<IRegisterProps> = () => {
                         <div className="form-group">
                             <label >Password</label>
                             <input
-                                value={null}
-                                onChange={null}
+                                value={values.password}
+                                onChange={handleChange}
                                 type="password"
                                 name='password'
                                 className="form-control"
@@ -48,7 +67,7 @@ const Register: React.FC<IRegisterProps> = () => {
                                 autoComplete="current-password" />
                         </div>
                         <div className="row">
-                            <div onClick={register} className="btn btn-outline-primary block w-50 mx-auto">Register!</div>
+                            <div onClick={handleRegister} className="btn btn-outline-primary block w-50 mx-auto">Register!</div>
                         </div>
                     </form>
                 </div>

@@ -26,6 +26,9 @@ const Navbah: React.FC<NavbahProps> = (props) => {
                     />
                 </div>
             </section>
+            <div data-pw-desk="leaderboard_atf"
+                data-pw-mobi="leaderboard_atf">
+            </div>
         </>
     )
 }

@@ -6,7 +6,7 @@ import * as passport from 'passport'
 
 const router = Router();
 
-router.get('/',passport.authenticate('jwt'), async (req: ReqUser, res, next) => {
+router.get('/', async (req: ReqUser, res, next) => {
     try {
         const blogs = await db.blogs.all();
         res.json(blogs);

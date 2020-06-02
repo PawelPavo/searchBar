@@ -13,6 +13,8 @@ import Details from './pages/Details';
 import NewBlog from './pages/NewBlog';
 import Register from './pages/auth/Register';
 import Edit from './components/Edit';
+import PrivateRoute from './components/PrivateRoute';
+
 
 const stripePromise = loadStripe('pk_test_MRMivgTfwcT3UfCgH8aCjiqW00AHT65rhC');
 
@@ -26,9 +28,9 @@ const App: React.FC<IAppProps> = () => {
 				<Route exact path="/login">
 					<Login />
 				</Route>
-				<Route exact path="/profile">
+				<PrivateRoute exact path="/profile">
 					<Profile />
-				</Route>
+				</PrivateRoute>
 				<Route exact path="/contact">
 					<Contact />
 				</Route>

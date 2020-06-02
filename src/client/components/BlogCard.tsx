@@ -5,7 +5,6 @@ import { FaEye, } from 'react-icons/fa';
 import * as moment from 'moment';
 
 const BlogCard: React.SFC<BlogCardProps> = props => {
-
     return (
         <>
             <div className="card my-5 shadow border-0">
