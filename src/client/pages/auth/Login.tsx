@@ -7,16 +7,14 @@ import { useState, useEffect } from 'react';
 import { setStorage } from '../../utils/api-services';
 
 const Login: React.FC<ILoginProps> = () => {
-    const { state } = useLocation<{msg: string}>();
+    const { state, pathname } = useLocation<{ msg: string }>();
     const history = useHistory();
-    const { pathname } = useLocation()
     const navbarText = getPathText(pathname)
     const [error, setError] = React.useState<string>('')
     const [values, setValues] = useState<{ [key: string]: string }>({
         email: 'NewEmail@newEmail.com',
         password: 'NewPassword'
     })
-
     useEffect(() => {
         setError(state?.msg)
     }, [])
@@ -38,8 +36,11 @@ const Login: React.FC<ILoginProps> = () => {
         if (res.ok) {
             const info = await res.json();
             setStorage(info.token, info.role)
-            history.push('/blog')
-            console.log(info);
+            if (state?.msg) {
+                history.goBack()
+            } else {
+                history.push('/profile')
+            }
         }
     };
 

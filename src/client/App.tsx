@@ -14,7 +14,7 @@ import NewBlog from './pages/NewBlog';
 import Register from './pages/auth/Register';
 import Edit from './components/Edit';
 import PrivateRoute from './components/PrivateRoute';
-
+import Tags from './pages/Tags'
 
 const stripePromise = loadStripe('pk_test_MRMivgTfwcT3UfCgH8aCjiqW00AHT65rhC');
 
@@ -48,12 +48,15 @@ const App: React.FC<IAppProps> = () => {
 				<Route exact path="/register">
 					<Register />
 				</Route>
-				<Route exact path="/:id/details">
+				<PrivateRoute exact path="/:id/details/:title?">
 					<Details />
-				</Route>
-				<Route exact path="/:id/edit">
+				</PrivateRoute>
+				<Route exact path="/:id/edit/:title?">
 					<Edit />
 				</Route>
+				<PrivateRoute exact path="/:tagid/tags">
+					<Tags />
+				</PrivateRoute>
 			</Switch>
 		</BrowserRouter>
 	);

@@ -26,6 +26,8 @@ const Edit: React.FC<IEditProps> = () => {
     const [content, setContent] = useState<string>('');
     const [image_url, setImage_url] = useState<string>('');
 
+    
+
     useEffect(() => {
         (async () => {
             let blogid = id;
@@ -56,9 +58,6 @@ const Edit: React.FC<IEditProps> = () => {
     const deleteBlog = async (id: number) => {
         try {
             await apiServices(`/api/blogs/${id}`, 'DELETE')
-            // await fetch(`/api/blogs/${id}`, {
-            //     method: 'DELETE'
-            // });
             Swal.fire({
                 icon: 'success',
                 title: 'Success',
@@ -70,6 +69,8 @@ const Edit: React.FC<IEditProps> = () => {
         }
     }
 
+
+    
     return (
         <main className="container">
             <Helmet>
@@ -78,6 +79,8 @@ const Edit: React.FC<IEditProps> = () => {
 
             <Navbah />
             <h2 className="text-center my-4 text-muted">Blog Edit</h2>
+
+            
 
             <section className="row mt-5 justify-content-center">
                 <div className="col-md-12">

@@ -24,7 +24,6 @@ const PrivateRoute: React.FC<PrivateRouteProps> = ({ children, ...rest }) => {
                 setChecking(false);
             } else {
                 setChecking(false);
-                // setTimeout(() => setChecking(false), 3000)
             }
         })();
     }, []);

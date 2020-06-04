@@ -7,7 +7,6 @@ import { Link, useLocation, NavLink } from 'react-router-dom';
 import { FaFeather, FaUserPlus } from 'react-icons/fa';
 import { getPathText } from '../utils/pathing';
 import { Helmet } from 'react-helmet';
-import apiServices from '../utils/api-services';
 
 
 const Blogs: React.SFC<BlogsProps> = () => {
@@ -31,13 +30,13 @@ const Blogs: React.SFC<BlogsProps> = () => {
   return (
     <main className="container">
       <Helmet>
-        <title>{navbarText}</title>
+        <title> All {navbarText}</title>
       </Helmet>
 
       <Navbah />
 
       <div>
-        <h2 className="text-center my-4 text-muted">{navbarText}</h2>
+        <h2 className="text-center my-4 text-muted">All {navbarText}</h2>
         <section className="row mt-3 justify-content-end">
           <div className="col-md-4">
             <div className="btn-group-vertical blog-btn">

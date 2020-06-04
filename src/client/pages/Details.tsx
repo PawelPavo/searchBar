@@ -1,13 +1,10 @@
 import * as React from 'react';
 import Navbah from '../components/Navbah';
-import { useLocation, RouteComponentProps, useParams, useHistory } from 'react-router-dom';
-import { getPathText } from '../utils/pathing';
+import { useParams, useHistory } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { IBlogs } from '../utils/interfaces';
 import { useEffect, useState } from 'react';
 import BlogDetailsCard from '../components/BlogDetailsCard'
-import blogs from '../../server/db/queries/blogs';
-import Typist from 'react-typist';
 
 
 
@@ -32,7 +29,6 @@ const Details: React.SFC<DetailsProps> = props => {
         if (role !== 'guest') {
             history.push({ pathname: '/login', state: { msg: 'You must be logged in to read this blog' } })
         } else {
-
             (async () => {
                 let blogid = id
                 try {

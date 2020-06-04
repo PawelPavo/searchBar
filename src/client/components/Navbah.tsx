@@ -1,22 +1,46 @@
 import * as React from 'react';
 import { NavLink } from 'react-router-dom';
+import { useEffect } from 'react';
+import { logout } from '../utils/api-services';
+import { FaSearch, } from 'react-icons/fa';
+
 
 const Navbah: React.FC<NavbahProps> = (props) => {
     const [show, setShow] = React.useState(false);
     const [query, setQuery] = React.useState('')
+    const [login, setLogin] = React.useState('Login')
+    const [loginTextColor, setLoginTextColor] = React.useState('text-primary')
+
+    useEffect(() => {
+        const role = localStorage.getItem('role')
+        if (role !== 'guest') {
+            setLogin('Login')
+            setLoginTextColor('text-primary border border-primary px-1 rounded')
+        } else {
+            setLogin('Logout')
+            setLoginTextColor('text-danger border border-danger px-1 font-italic rounded shadow-sm')
+        }
+    }, [])
+
+    const handleclick = () => {
+        const role = localStorage.getItem('role')
+        if (role === 'guest') {
+            logout()
+        }
+    }
 
     return (
         <>
             <section className="row my-2 mobile-nav">
                 <div className="col-12">
                     <nav className="nav justify-content-around p-3 border-bottom border-secondary">
-                        <NavLink exact to="/" activeClassName="text-secondary"> Home  </NavLink>
-                        <NavLink exact to="/profile" activeClassName="text-secondary"> Profile </NavLink>
-                        <NavLink exact to="/blog" activeClassName="text-secondary"> Blog </NavLink>
-                        <NavLink exact to="/contact" activeClassName="text-secondary">  Contact Me </NavLink>
-                        <NavLink exact to="/donate" activeClassName="text-secondary">  Donate  </NavLink>
-                        <NavLink exact to="/login" activeClassName="text-secondary"> Login </NavLink>
-                        <span onClick={() => setShow(!show)} className="text-success"> Search </span>
+                        <NavLink exact to="/" activeClassName="text-warning"> Home  </NavLink>
+                        <NavLink exact to="/profile" activeClassName="text-warning"> Profile </NavLink>
+                        <NavLink exact to="/blog" activeClassName="text-warning"> Blogs </NavLink>
+                        <NavLink exact to="/contact" activeClassName="text-warning">  Contact Me </NavLink>
+                        <NavLink exact to="/donate" activeClassName="text-warning">  Donate  </NavLink>
+                        <NavLink onClick={handleclick} exact to="/login" className={loginTextColor} activeClassName="text-primary"> {login} </NavLink>
+                        <span onClick={() => setShow(!show)} className="text-primary mt-1"> <FaSearch /> </span>
                     </nav>
                     <input
                         value={query}

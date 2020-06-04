@@ -36,7 +36,6 @@ export default async (uri: string, method: string = 'GET', body?: {}) => {
 
     } catch (error) {
         console.log(error);
-        // return 'Server Error Contact Your System Admin'
         throw error;
         
     }

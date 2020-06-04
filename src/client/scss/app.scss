@@ -1,5 +1,6 @@
 $theme-colors: (
-    'primary': #0091ea 
+    'primary': #5484ab,
+    'custom':  #5484ab
     //Covalence Blue!  :D
 );
 
@@ -33,6 +34,12 @@ $theme-colors: (
     border-radius: 25px !important;
 }
 
+.tag-button {
+    position: relative;
+    margin-left: -5%;
+    margin-top: 5%;
+}
+
 .card-item {
     max-width: 450px;
     height: 270px;
@@ -57,40 +64,7 @@ $theme-colors: (
  position: fixed !important;
 }
 
-.timer-container {
-    background-color: #282c34;
-}
 
-// .timer-body {
-//     display: flex;
-//     margin: 0;
-//     flex-direction: row;
-//     height: 50vh;
-//     justify-content: center;
-//     align-items: center;
-//     letter-spacing: 5px;
-//     color: #ccc;
-// }
-
-
-
-.timer-text{
-    color: #ccc;
-    margin: 0;
-    bottom: 7px;
-    font-size: 5rem;
-    min-width: 100px;
-    text-align: center;
-}
-
-.mil-sec {
-    font-size: 2rem;
-}
-
-// .control-div{
-//     padding-bottom: 100px;
-//     position: relative;
-// }
 
 
 @media screen and (max-width: 480px) {
@@ -98,6 +72,7 @@ $theme-colors: (
         padding-top: 0px;
         margin-left: 75px;
         position: relative !important;
+        display:inline-block;
     }
 }
 

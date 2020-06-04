@@ -15,7 +15,7 @@ export const getPathText = (pathname: string): string => {
         case '/profile':
             return 'My Profile';
         case '/blog':
-            return 'Blog';
+            return 'Blogs';
         case '/contact':
             return 'Contact Me'
         case '/donate':

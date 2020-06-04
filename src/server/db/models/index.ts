@@ -34,3 +34,14 @@ export interface DBResp {
     affectedRows?: number;
     insertId?: number;
 }
+export interface TagsT {
+    id: number;
+    name: string;
+    created_at: Date;
+}
+
+export interface BlogTagsT {
+    blogid: number;
+    tagid: number;
+}
+

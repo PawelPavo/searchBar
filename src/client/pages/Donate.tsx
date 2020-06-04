@@ -2,7 +2,7 @@ import * as React from 'react';
 import Navbah from '../components/Navbah';
 import { useState } from 'react';
 import { useHistory, useLocation } from "react-router-dom";
-import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js'
+import { useElements, useStripe } from '@stripe/react-stripe-js'
 import { CardNumberElement, CardExpiryElement, CardCvcElement } from '@stripe/react-stripe-js'
 import { getPathText } from '../utils/pathing';
 import { Helmet } from 'react-helmet';

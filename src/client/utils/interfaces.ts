@@ -6,8 +6,16 @@ export interface IBlogs {
     authorid: number;
     created_at: Date;
     name: string;
+    tag_name?: string;
+    tagid?:number;
 };
 
 export interface IHeaders {
     [key: string]: string;
 }
+
+export interface ITags {
+    id: number;
+    name: string;
+    created_at: Date;
+};

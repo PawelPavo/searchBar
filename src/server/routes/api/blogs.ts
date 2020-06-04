@@ -16,8 +16,21 @@ router.get('/', async (req: ReqUser, res, next) => {
     };
 });
 
+router.get('/tags/:id',async (req: ReqUser, res, next) => {
+    const id = Number(req.params.id)
+    console.log(req)
+    try {
+        const blogs = await db.blogs.tagSearch(id)
+        res.json(blogs);
+    } catch (error) {
+        console.log(error)
+        next(error)
+    }
+})
+
 router.get('/:id',async (req: ReqUser, res, next) => {
     const id = req.params.id;
+    console.log(req)
     try {
         const [blog] = await db.blogs.one(id)
         res.json(blog);
@@ -30,7 +43,8 @@ router.get('/:id',async (req: ReqUser, res, next) => {
 router.post('/' ,passport.authenticate('jwt'), blogBody, async (req: ReqUser, res, next) => {
     const blog = req.body;
     try {
-        const newBlog = await db.blogs.insert(blog.title, blog.content, blog.authorid, blog.image_url)
+        const {insertId} = await db.blogs.insert(blog.title, blog.content, blog.authorid, blog.image_url)
+        await db.blogTags.insert(insertId, blog.tagid)
         res.status(201).json({msg:'Blog CREATED'})
     } catch (error) {
         console.log(error)
@@ -61,6 +75,5 @@ router.delete('/:id',passport.authenticate('jwt'), async(req:ReqUser, res, next)
         next(error)
     }
 })
-
 
 export default router;
