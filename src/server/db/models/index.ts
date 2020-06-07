@@ -45,3 +45,11 @@ export interface BlogTagsT {
     tagid: number;
 }
 
+export interface CommentsT {
+    id?: number;
+    blogid?: number;
+    username?: string;
+    user_comment?: string;
+    created_at?: string;
+}
+

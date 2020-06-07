@@ -8,6 +8,7 @@ export interface IBlogs {
     name: string;
     tag_name?: string;
     tagid?:number;
+    blogid?: number;
 };
 
 export interface IHeaders {
@@ -19,3 +20,10 @@ export interface ITags {
     name: string;
     created_at: Date;
 };
+
+export interface IComments {
+    blogid?: number;
+    username?: string;
+    user_comments?: string;
+    created_at?: Date;
+}

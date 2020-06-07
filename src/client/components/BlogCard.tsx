@@ -22,8 +22,8 @@ const BlogCard: React.SFC<BlogCardProps> = props => {
                                 <small className="text-muted">Written by: {props.blog.name}</small>
                                 <small className="text-muted">{moment(props.blog.created_at).format('MMM Do YYYY')} </small>
                             </div>
-                            <div className="row justify-content-around px-5">
-                                <h5>{props.blog.title}</h5>
+                            <div className="row justify-content-around px-5 ">
+                                <h5 className="long-text">{props.blog.title}</h5>
                             </div>
                         </div>
                     </div>

@@ -64,6 +64,13 @@ $theme-colors: (
  position: fixed !important;
 }
 
+.long-text {
+    display: block;
+    width: auto;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
 
 
 

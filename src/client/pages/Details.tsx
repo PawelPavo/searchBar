@@ -6,8 +6,6 @@ import { IBlogs } from '../utils/interfaces';
 import { useEffect, useState } from 'react';
 import BlogDetailsCard from '../components/BlogDetailsCard'
 
-
-
 export interface DetailsProps { }
 
 const Details: React.SFC<DetailsProps> = props => {

@@ -23,11 +23,13 @@ import tokens from './queries/tokens';
 import users from './queries/users';
 import tags from './queries/tags';
 import blogTags from './queries/blog-tags';
+import comments from './queries/comments'
 
 export default {
     blogs,
     tokens,
     users,
     tags,
-    blogTags
+    blogTags,
+    comments
 };

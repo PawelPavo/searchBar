@@ -1,12 +1,11 @@
 import * as React from 'react';
 import * as moment from 'moment';
-import { Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { IBlogs } from '../utils/interfaces';
 import { FaUndo, } from 'react-icons/fa';
 import * as ReactMarkdown from 'react-markdown';
 import 'github-markdown-css'
-import { urlRegex} from '../utils/url-regex'
-
+import { urlRegex } from '../utils/url-regex'
 
 
 export interface BlogDetailsCardProps {
@@ -24,14 +23,14 @@ const BlogDetailsCard: React.SFC<BlogDetailsCardProps> = ({ blogs }) => {
                     </div>
 
                     <div className="card-body">
-                    <Link to={`/${blogs.tagid}/tags`} className="tag-button btn btn-sm shadow border-rounded bg-primary border-primary">{blogs.tag_name}</Link>
+                        <Link to={`/${blogs.tagid}/tags`} className="tag-button btn btn-sm shadow border-rounded bg-primary border-primary">{blogs.tag_name}</Link>
                         <div className="col-md-4 mx-auto my-2">
                             <img src={blogs.image_url} className="card-img image-fluid" alt="..." width="auto" height="auto" />
                         </div>
                         <div className="col">
                             <div className="card overflow-auto border-0" style={{ minHeight: '302px' }}>
                                 <div className="markdown-body">
-                                    <ReactMarkdown source={blogs.content} /> 
+                                    <ReactMarkdown source={blogs.content} />
                                 </div>
                             </div>
                         </div>
@@ -41,6 +40,11 @@ const BlogDetailsCard: React.SFC<BlogDetailsCardProps> = ({ blogs }) => {
                 <div className="row justify-content-between mb-5">
                     <Link className="btn btn-outline-warning btn-block mt-3 w-25 mx-auto shadow" to={`/${blogs.id}/edit/${urlRegex(blogs.title)}`}>Edit</Link>
                     <Link to="/blog" className="btn btn-outline-primary btn-block mt-3 w-25 mx-auto shadow"> <FaUndo />  All Blogs</Link>
+                </div>
+                <div className="row">
+                    <div className="col">
+    <h1>{}</h1>
+                    </div>
                 </div>
             </div>
         </>
