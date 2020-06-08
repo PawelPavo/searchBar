@@ -18,7 +18,6 @@ router.get('/', async (req: ReqUser, res, next) => {
 
 router.get('/tags/:id',async (req: ReqUser, res, next) => {
     const id = Number(req.params.id)
-    console.log(req)
     try {
         const blogs = await db.blogs.tagSearch(id)
         res.json(blogs);
@@ -30,7 +29,6 @@ router.get('/tags/:id',async (req: ReqUser, res, next) => {
 
 router.get('/:id',async (req: ReqUser, res, next) => {
     const id = req.params.id;
-    console.log(req)
     try {
         const [blog] = await db.blogs.one(id)
         res.json(blog);

@@ -8,7 +8,6 @@ const router = Router();
 
 router.get('/', async (req: ReqUser, res, next) => {
     const blogid = Number(req.params.blogid);
-    console.log(req)
     try {
         const comments = await db.comments.allComments()
         res.json(comments);
@@ -20,7 +19,6 @@ router.get('/', async (req: ReqUser, res, next) => {
 
 router.get('/:id', async (req: ReqUser, res, next) => {
     const id = (req.params.id);
-    console.log(req.params.id)
     try {
         const comments = await db.comments.allForBlog(id)
         res.json(comments);
@@ -36,8 +34,19 @@ router.post('/', commentBody, async (req: ReqUser, res, next) => {
         const { insertId } = await db.comments.insert(comment.blogid, comment.username, comment.user_comment)
         res.status(201).json({ insertId, msg: 'Comment CREATED' })
     } catch (error) {
+        console.log({error, msg:'Something wrong in insert route'})
+        next(error)
+    }
+})
+
+router.get('/count/:id', async (req: ReqUser, res, next) => {
+    const id = (req.params.id);
+    try {
+        const comments = await db.comments.count(id)
+        res.json(comments);
+    } catch (error) {
         console.log(error)
-        next(commentBody)
+        next(error)
     }
 })
 

@@ -2,9 +2,10 @@ import * as React from 'react';
 import Navbah from '../components/Navbah';
 import { useParams, useHistory } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import { IBlogs } from '../utils/interfaces';
+import { IBlogs, IComments } from '../utils/interfaces';
 import { useEffect, useState } from 'react';
 import BlogDetailsCard from '../components/BlogDetailsCard'
+import CommentCard from '../components/Comment';
 
 export interface DetailsProps { }
 
@@ -40,6 +41,41 @@ const Details: React.SFC<DetailsProps> = props => {
         }
     }, [id]);
 
+    const [allComments, setAllComments] = useState<IComments[]>([])
+
+    useEffect(() => {
+        (async () => {
+            let blogid = id;
+            try {
+                let res = await fetch(`/api/comments/${blogid}`);
+                let allComments = await res.json()
+                setAllComments(allComments)
+            } catch (error) {
+                console.log({ error: 'Unable to get comments' })
+            }
+        })()
+    }, [id])
+
+    const [username, setUsername] = useState<string>('')
+    const [user_comment, setComment] = useState<string>('')
+
+    const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault();
+        const blogid = id
+        try {
+            await fetch('/api/comments', {
+                method: 'POST',
+                headers: { "Content-type": "application/json" },
+                body: JSON.stringify({ blogid, username, user_comment })
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+
+
+
     return (
         <main className="container">
             <Helmet>
@@ -52,6 +88,37 @@ const Details: React.SFC<DetailsProps> = props => {
             <div className="row justify-content-center">
                 <BlogDetailsCard blogs={blog} />
             </div>
+            <div className="col border border-left-0 border-right-0 border-top-0">
+                <h1 className="text-center font-weight-light">Comments</h1>
+            </div>
+            <section className="row mt-3 justify-content-center">
+                <div className="col-md-8">
+                    <form className="form-group p-3 rounded border-0 bg-light">
+                        <div className="col-10 mx-auto">
+                            <input className="form-control mb-3 border-primary border-top-0 border-left-0 border-right-0 bg-light rounded-0"
+                                type="text"
+                                placeholder="Enter your name ..."
+                                value={username}
+                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUsername(e.target.value)}
+                            />
+                        </div>
+                        <div className="col-10 mx-auto">
+                            <input className="form-control mb-3 border-primary border-top-0 border-left-0 border-right-0 bg-light rounded-0"
+                                type="text"
+                                placeholder="Enter your comment ..."
+                                value={user_comment}
+                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setComment(e.target.value)}
+                            />
+                        </div>
+                        <button onClick={handleClick} type="button" className="btn btn-outline-primary btn-lg btn-block mt-3 w-50 mx-auto">Post</button>
+                    </form>
+                </div>
+            </section>
+            <section className="row d-flex justify-content-center">
+                {allComments.map(comment => (
+                    <CommentCard key={comment.id} comment={comment} />
+                ))}
+            </ section>
         </main>
     )
 }

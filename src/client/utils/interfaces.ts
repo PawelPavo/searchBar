@@ -22,8 +22,10 @@ export interface ITags {
 };
 
 export interface IComments {
+    [key: string]: any;
+    id?: number;
     blogid?: number;
     username?: string;
-    user_comments?: string;
+    user_comment?: string;
     created_at?: Date;
 }

@@ -34,7 +34,6 @@ const Blogs: React.SFC<BlogsProps> = () => {
       </Helmet>
 
       <Navbah />
-
       <div>
         <h2 className="text-center my-4 text-muted">All {navbarText}</h2>
         <section className="row mt-3 justify-content-end">

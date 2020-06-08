@@ -10,7 +10,7 @@ export const Query = <T=any> (query?: string, values?:any) => {
     return new Promise<T> ((resolve, reject) => {
         pool.query(sql, (error, results) => {
             if(error) {
-                reject(error)
+                reject({error, msg:'Fails in the pool'})
             } else {
                 resolve(results)
             }
