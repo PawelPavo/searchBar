@@ -1,12 +1,14 @@
 import * as React from 'react';
 import Swal from 'sweetalert2'
 import Navbah from '../components/Navbah';
+import apiServices from '../utils/api-services';
+import Modali, { useModali } from 'modali';
 import { useParams, useHistory, NavLink } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { IBlogs } from '../utils/interfaces';
 import { useState, useEffect } from 'react';
 import { FaTimes, FaCheck } from 'react-icons/fa';
-import apiServices from '../utils/api-services';
+
 
 const Edit: React.FC<IEditProps> = () => {
     const { id } = useParams();
@@ -25,8 +27,6 @@ const Edit: React.FC<IEditProps> = () => {
     const [title, setTitle] = useState<string>('');
     const [content, setContent] = useState<string>('');
     const [image_url, setImage_url] = useState<string>('');
-
-    
 
     useEffect(() => {
         (async () => {
@@ -58,19 +58,30 @@ const Edit: React.FC<IEditProps> = () => {
     const deleteBlog = async (id: number) => {
         try {
             await apiServices(`/api/blogs/${id}`, 'DELETE')
-            Swal.fire({
-                icon: 'success',
-                title: 'Success',
-                text: 'Your blog has been deleted!',
-            })
             history.push('/blog')
         } catch (error) {
             console.log(error)
         }
     }
 
+    const [completeModal, toggleCompleteModal] = useModali({
+        animated: true,
+        title: 'Are you sure?',
+        message: 'Deleting this blog will be permanent.',
+        buttons: [
+            <Modali.Button
+                label="Cancel"
+                isStyleCancel
+                onClick={() => toggleCompleteModal()}
+            />,
+            <Modali.Button
+                label="Delete"
+                isStyleDestructive
+                onClick={() => deleteBlog(id)}
+            />,
+        ],
+    });
 
-    
     return (
         <main className="container">
             <Helmet>
@@ -79,8 +90,6 @@ const Edit: React.FC<IEditProps> = () => {
 
             <Navbah />
             <h2 className="text-center my-4 text-muted">Blog Edit</h2>
-
-            
 
             <section className="row mt-5 justify-content-center">
                 <div className="col-md-12">
@@ -117,7 +126,8 @@ const Edit: React.FC<IEditProps> = () => {
                             <small className="text-muted">*Markdown is supported</small>
                         </div>
                         <div className="row justify-content-around">
-                            <button onClick={() => deleteBlog(id)} type="button" className="btn btn-outline-danger w-25 shadow"><FaTimes /> Delete</button>
+                            <button onClick={toggleCompleteModal} type="button" className="btn btn-outline-danger w-25 shadow"><FaTimes /> Delete</button>
+                            <Modali.Modal {...completeModal}></Modali.Modal>
                             <NavLink exact to='/blog' className="btn btn-outline-warning w-25 shadow">Cancel</NavLink>
                             <button onClick={handleClick} type="button" className="btn btn-outline-primary w-25 shadow"><FaCheck /> Submit Changes</button>
                         </div>

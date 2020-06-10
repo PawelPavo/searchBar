@@ -2,6 +2,7 @@ import db from "../../db";
 import { Router } from "express";
 import { ReqUser } from "../../utils/interfaces";
 import { commentBody } from "../../middleware/comments";
+import comments from "../../db/queries/comments";
 
 
 const router = Router();
@@ -44,6 +45,17 @@ router.get('/count/:id', async (req: ReqUser, res, next) => {
     try {
         const comments = await db.comments.count(id)
         res.json(comments);
+    } catch (error) {
+        console.log(error)
+        next(error)
+    }
+})
+
+router.delete('/:id', async(req:ReqUser, res, next) => {
+    const id = Number(req.params.id);
+    try {
+        const result = await db.comments.destroy(id)
+        res.status(200).json({msg: 'Comment DELETED', result} )
     } catch (error) {
         console.log(error)
         next(error)

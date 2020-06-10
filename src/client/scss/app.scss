@@ -1,6 +1,7 @@
 $theme-colors: (
     'primary': #5484ab,
-    'custom':  #5484ab
+    'custom':  #5484ab,
+    'danger': #be4141
     //Covalence Blue!  :D
 );
 
@@ -40,6 +41,16 @@ $theme-colors: (
     margin-top: 5%;
 }
 
+.avatar-profile-image {
+    position: relative;
+    margin-top: -10%; 
+}
+
+.profile-image-col {
+    position: relative;
+    margin-top: 10%; 
+}
+
 .card-item {
     max-width: 450px;
     height: 270px;
@@ -72,7 +83,14 @@ $theme-colors: (
     text-overflow: ellipsis;
 }
 
+.emoji{
+    height: 0px;
+    transition: height 2s;
+}
 
+.emoji-active {
+    height: 40px;
+}
 
 @media screen and (max-width: 480px) {
     .blog-btn {

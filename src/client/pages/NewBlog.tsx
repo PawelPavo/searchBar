@@ -36,7 +36,7 @@ const NewBlog: React.FC<NewBlogProps> = props => {
     const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         try {
-            await apiServices('/api/blogs', 'POST', { title, content, authorid: 3, tagid: newTag, image_url  })
+            await apiServices('/api/blogs', 'POST', { title, content, authorid: 3, tagid: newTag, image_url })
             history.push('/blog');
         } catch (error) {
             console.log(error);
@@ -56,23 +56,23 @@ const NewBlog: React.FC<NewBlogProps> = props => {
                 <div className="col-md-12">
                     <form className="form-group p-3 rounded border-0 shadow bg-light">
                         <div className="col-10 mx-auto">
-                            <input className="form-control mb-5 border-primary border-top-0 border-left-0 border-right-0 bg-light rounded-0" 
-                            type="text" 
-                            placeholder="Enter title ..."
+                            <input className="form-control mb-5 border-primary border-top-0 border-left-0 border-right-0 bg-light rounded-0"
+                                type="text"
+                                placeholder="Enter title ..."
                                 value={title}
                                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setTitle(e.target.value)}
                             />
-                            <input className="form-control mb-5 border-primary border-top-0 border-left-0 border-right-0 bg-light rounded-0" 
-                            type="text" placeholder="Enter image URL ..."
+                            <input className="form-control mb-5 border-primary border-top-0 border-left-0 border-right-0 bg-light rounded-0"
+                                type="text" placeholder="Enter image URL ..."
                                 value={image_url}
                                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setImage_url(e.target.value)}
                             />
                             <select className="form-control"
-                            value={newTag}
-                            onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setNewTag(e.target.value)}>
-                            <option value="0" disabled>Choose a tag ...</option>
-                            {tags.map(tag => (
-                                <option key={tag.id} value={tag.id}>{tag.name}</option>
+                                value={newTag}
+                                onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setNewTag(e.target.value)}>
+                                <option value="0" disabled>Choose a tag ...</option>
+                                {tags.map(tag => (
+                                    <option key={tag.id} value={tag.id}>{tag.name}</option>
                                 ))}
                             </select>
                         </div>
@@ -99,7 +99,10 @@ const NewBlog: React.FC<NewBlogProps> = props => {
                                 <small className="d-none d-sm-block d-print-block">*Markdown Preview</small>
                             </div>
                         </div>
-                        <button onClick={handleClick} type="button" className="btn btn-outline-primary btn-lg btn-block mt-3 w-75 mx-auto">Create New Blog</button>
+                        <button
+                            onClick={handleClick}
+                            type="button"
+                            className="btn btn-outline-primary btn-lg btn-block mt-3 w-75 mx-auto">Create New Blog</button>
                     </form>
                 </div>
             </section>

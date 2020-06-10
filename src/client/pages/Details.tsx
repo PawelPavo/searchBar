@@ -1,11 +1,15 @@
 import * as React from 'react';
 import Navbah from '../components/Navbah';
+import { FaSmile } from 'react-icons/fa';
 import { useParams, useHistory } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { IBlogs, IComments } from '../utils/interfaces';
 import { useEffect, useState } from 'react';
 import BlogDetailsCard from '../components/BlogDetailsCard'
 import CommentCard from '../components/Comment';
+import 'emoji-mart/css/emoji-mart.css'
+import { Picker } from 'emoji-mart'
+
 
 export interface DetailsProps { }
 
@@ -68,14 +72,34 @@ const Details: React.SFC<DetailsProps> = props => {
                 headers: { "Content-type": "application/json" },
                 body: JSON.stringify({ blogid, username, user_comment })
             });
+            location.reload()
         } catch (error) {
             console.log(error);
         }
     }
 
+    const handleKeyPress = async (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.charCode === 13) {
+            e.preventDefault();
+            const blogid = id
+            try {
+                await fetch('/api/comments', {
+                    method: 'POST',
+                    headers: { "Content-type": "application/json" },
+                    body: JSON.stringify({ blogid, username, user_comment })
+                });
+                location.reload()
+            } catch (error) {
+                console.log(error);
+            }
+        }
+    }
 
-
-
+    const addEmoji = e => {
+        let emoji = e.native;
+        setComment(user_comment + emoji);
+        console.log(emoji)
+    };
     return (
         <main className="container">
             <Helmet>
@@ -91,7 +115,7 @@ const Details: React.SFC<DetailsProps> = props => {
             <div className="col border border-left-0 border-right-0 border-top-0">
                 <h1 className="text-center font-weight-light">Comments</h1>
             </div>
-            <section className="row mt-3 justify-content-center">
+            <section className="row mt-3 justify-content-center mb-5">
                 <div className="col-md-8">
                     <form className="form-group p-3 rounded border-0 bg-light">
                         <div className="col-10 mx-auto">
@@ -102,23 +126,33 @@ const Details: React.SFC<DetailsProps> = props => {
                                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUsername(e.target.value)}
                             />
                         </div>
-                        <div className="col-10 mx-auto">
+                        <div className="col-10 mx-auto input-group mb-3 mx-auto">
                             <input className="form-control mb-3 border-primary border-top-0 border-left-0 border-right-0 bg-light rounded-0"
                                 type="text"
                                 placeholder="Enter your comment ..."
                                 value={user_comment}
                                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setComment(e.target.value)}
+                                onKeyPress={handleKeyPress}
                             />
+                            <div className="input-group-append">
+                                <a className="btn btn-sm my-auto text-primary">
+                                    <FaSmile />
+                                </a>
+                            </div>
                         </div>
                         <button onClick={handleClick} type="button" className="btn btn-outline-primary btn-lg btn-block mt-3 w-50 mx-auto">Post</button>
                     </form>
+                    <div className="text-center">
+                        <Picker onSelect={addEmoji} />
+                    </div>
                 </div>
+                <div className="col-md-6">
+                    {allComments.map(comment => (
+                        <CommentCard key={comment.id} comment={comment} />
+                    ))}
+                </ div>
             </section>
-            <section className="row d-flex justify-content-center">
-                {allComments.map(comment => (
-                    <CommentCard key={comment.id} comment={comment} />
-                ))}
-            </ section>
+
         </main>
     )
 }

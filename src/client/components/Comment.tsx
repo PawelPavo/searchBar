@@ -1,11 +1,33 @@
 import * as React from 'react';
 import * as moment from 'moment';
+import Swal from 'sweetalert2'
+import Modali, { useModali } from 'modali';
 import { IComments } from '../utils/interfaces';
 import { useState } from 'react';
-import { FaThumbsDown, FaThumbsUp } from 'react-icons/fa';
+import { FaThumbsDown, FaThumbsUp, FaTimes } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
+
 
 
 const CommentCard: React.SFC<CommentCardProps> = ({ comment }) => {
+
+    const [completeModal, toggleCompleteModal] = useModali({
+        animated: true,
+        title: 'Are you sure?',
+        message: 'Deleting this comment will be permanent.',
+        buttons: [
+            <Modali.Button
+                label="Cancel"
+                isStyleCancel
+                onClick={() => toggleCompleteModal()}
+            />,
+            <Modali.Button
+                label="Delete"
+                isStyleDestructive
+                onClick={() => deleteComment(comment.id)}
+            />,
+        ],
+    });
 
     const [likes, setLikes] = useState<number>(0)
     const [dislikes, setDislikes] = useState<number>(0)
@@ -18,19 +40,36 @@ const CommentCard: React.SFC<CommentCardProps> = ({ comment }) => {
         setDislikes(dislikes + 1)
     }
 
-
+    const deleteComment = async (id: number) => {
+        try {
+            await fetch(`/api/comments/${comment.id}`, {
+                method: 'DELETE'
+            });
+            location.reload()
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     return (
         <>
-            <div className="media col-md-8 border my-1">
-                <img className="align-self-start mr-3 mt-1 rounded-circle" src="/avatar.png" alt="image" width="64" height="64" />
+            <div className="media border my-1 mb-3">
+                <Link to="/profile">
+                    <img className="align-self-start mx-1 my-1 rounded-circle" src="/Avatar.jpeg" alt="image" width="auto" height="64" />
+                </Link>
                 <div className="media-body border border-top-0 border-right-0 border-bottom-0">
-                    <div className="col d-flex justify-content-between">
-                        <h6 className="mt-3 text-primary">{comment.username}</h6>
-                        <small className="mt-3">{moment(comment.created_at).format('MMM Do YYYY')}</small>
+                    <div className="col d-flex mt-3 justify-content-between">
+                        <div className="col d-flex justify-content-start mb-3">
+                            <Link to="/profile">
+                                <small className="text-primary font-weight-light">{comment.username} </small>
+                            </Link>
+                            <small className="text-muted ml-3 font-weight-light">{moment(comment.created_at).format(' MMM Do YYYY')}</small>
+                        </div>
+                        <div onClick={toggleCompleteModal} className="" style={{ color: '#be4141', cursor: 'pointer' }}>< FaTimes /></div>
+                        <Modali.Modal {...completeModal}></Modali.Modal>
                     </div>
-                    <div className="col d-flex justify-content-start">
-                        <p>{comment.user_comment}</p>
+                    <div className="col d-flex justify-content-start ml-3">
+                        <p className="">{comment.user_comment}</p>
                     </div>
                     <div className="col mb-2 d-flex justify-content-end">
                         <button type="button" onClick={handleDisikes} className="btn btn-outline-danger btn-sm">{dislikes} <FaThumbsDown /></button>
