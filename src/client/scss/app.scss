@@ -51,6 +51,16 @@ $theme-colors: (
     margin-top: 10%; 
 }
 
+.avatar-login-image {
+    position: relative;
+    margin-top: -17.5%; 
+}
+
+.login-image-col {
+    position: relative;
+    margin-top: 20%; 
+}
+
 .card-item {
     max-width: 450px;
     height: 270px;
@@ -90,6 +100,10 @@ $theme-colors: (
 
 .emoji-active {
     height: 40px;
+}
+
+.login-card {
+    height: 300px;
 }
 
 @media screen and (max-width: 480px) {

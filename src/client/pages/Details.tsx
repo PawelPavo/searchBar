@@ -48,16 +48,19 @@ const Details: React.SFC<DetailsProps> = props => {
     const [allComments, setAllComments] = useState<IComments[]>([])
 
     useEffect(() => {
-        (async () => {
-            let blogid = id;
-            try {
-                let res = await fetch(`/api/comments/${blogid}`);
-                let allComments = await res.json()
-                setAllComments(allComments)
-            } catch (error) {
-                console.log({ error: 'Unable to get comments' })
-            }
-        })()
+        const role = localStorage.getItem('role')
+        if (role === 'guest') {
+            (async () => {
+                let blogid = id;
+                try {
+                    let res = await fetch(`/api/comments/${blogid}`);
+                    let allComments = await res.json()
+                    setAllComments(allComments)
+                } catch (error) {
+                    console.log({ error: 'Unable to get comments' })
+                }
+            })()
+        }
     }, [id])
 
     const [username, setUsername] = useState<string>('')

@@ -55,7 +55,7 @@ const CommentCard: React.SFC<CommentCardProps> = ({ comment }) => {
         <>
             <div className="media border my-1 mb-3">
                 <Link to="/profile">
-                    <img className="align-self-start mx-1 my-1 rounded-circle" src="/Avatar.jpeg" alt="image" width="auto" height="64" />
+                    <img className="align-self-start mx-1 my-1 rounded-circle" src="/assets/Avatar.jpeg" alt="image" width="auto" height="64" />
                 </Link>
                 <div className="media-body border border-top-0 border-right-0 border-bottom-0">
                     <div className="col d-flex mt-3 justify-content-between">
