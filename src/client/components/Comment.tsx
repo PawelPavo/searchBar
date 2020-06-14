@@ -61,7 +61,7 @@ const CommentCard: React.SFC<CommentCardProps> = ({ comment }) => {
                     <div className="col d-flex mt-3 justify-content-between">
                         <div className="col d-flex justify-content-start mb-3">
                             <Link to="/profile">
-                                <small className="text-primary font-weight-light">{comment.username} </small>
+                                <small className="text-primary font-weight-light">{comment.name} </small>
                             </Link>
                             <small className="text-muted ml-3 font-weight-light">{moment(comment.created_at).format(' MMM Do YYYY')}</small>
                         </div>

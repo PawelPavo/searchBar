@@ -9,6 +9,7 @@ export interface IBlogs {
     tag_name?: string;
     tagid?:number;
     blogid?: number;
+    userid?: number
 };
 
 export interface IHeaders {
@@ -28,4 +29,5 @@ export interface IComments {
     username?: string;
     user_comment?: string;
     created_at?: Date;
+    userid?: number
 }

@@ -6,6 +6,8 @@ import * as passport from 'passport'
 
 const router = Router();
 
+
+
 router.get('/', async (req: ReqUser, res, next) => {
     try {
         const blogs = await db.blogs.all();
@@ -15,6 +17,28 @@ router.get('/', async (req: ReqUser, res, next) => {
         next(error)
     };
 });
+
+router.get('/search',async (req:ReqUser, res, next)=>{
+    const {content} = req.body
+    try {
+        const blog = await db.blogs.find(content)
+        res.json(blog)
+    } catch (error) {
+        console.log({error, msg:'Search is not working'})
+        next(error)
+    }
+})
+
+router.get('/search/:content',async (req:ReqUser, res, next)=>{
+    const content = req.params.content
+    try {
+        const blog = await db.blogs.find(content)
+        res.json(blog)
+    } catch (error) {
+        console.log({error, msg:'Search is not working'})
+        next(error)
+    }
+})
 
 router.get('/tags/:id',async (req: ReqUser, res, next) => {
     const id = Number(req.params.id)
@@ -38,10 +62,13 @@ router.get('/:id',async (req: ReqUser, res, next) => {
     }
 })
 
+
+
 router.post('/' ,passport.authenticate('jwt'), blogBody, async (req: ReqUser, res, next) => {
     const blog = req.body;
+    const userid = req.user.id
     try {
-        const {insertId} = await db.blogs.insert(blog.title, blog.content, blog.authorid, blog.image_url)
+        const {insertId} = await db.blogs.insert(userid, blog.title, blog.content, blog.authorid, blog.image_url)
         await db.blogTags.insert(insertId, blog.tagid)
         res.status(201).json({msg:'Blog CREATED'})
     } catch (error) {
@@ -73,5 +100,7 @@ router.delete('/:id',passport.authenticate('jwt'), async(req:ReqUser, res, next)
         next(error)
     }
 })
+
+
 
 export default router;

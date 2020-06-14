@@ -18,11 +18,13 @@ const Blogs: React.SFC<BlogsProps> = () => {
     const [blogs, setBlogs] = useState<IBlogs[]>([])
     const [headerText, setHeaderText] = useState('')
 
+
+    //authorization disabled to sort by tag, but still active in order to read.
     useEffect(() => {
-        const role = localStorage.getItem('role')
-        if (role !== 'guest') {
-            history.push({ pathname: '/login', state: { msg: 'You must be logged in to read this blog' } })
-        } else {
+        // const role = localStorage.getItem('role')
+        // if (role !== 'guest') {
+        //     history.push({ pathname: '/login', state: { msg: 'You must be logged in to read this blog' } })
+        // } else {
             (async () => {
                 try {
                     let res = await fetch(`/api/blogs/tags/${tagid}`);
@@ -34,7 +36,7 @@ const Blogs: React.SFC<BlogsProps> = () => {
                     console.log(error)
                 }
             })()
-        }
+        // }
     }, [tagid]);
 
 

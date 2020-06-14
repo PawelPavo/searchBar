@@ -5,6 +5,7 @@ export interface BlogsT {
     image_url: string;
     authorid: number;
     created_at: Date;
+    userid?: number
 };
 
 export interface AuthorsT {
@@ -51,5 +52,6 @@ export interface CommentsT {
     username?: string;
     user_comment?: string;
     created_at?: string;
+    userid?: number
 }
 

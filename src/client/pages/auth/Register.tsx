@@ -40,37 +40,34 @@ const Register: React.FC<IRegisterProps> = (props) => {
             <Navbah />
             <h2 className="text-center my-4 text-muted">{navbarText}</h2>
 
-            <div className="row justify-content-center">
-                <div className="col-md-6 shadow">
-                    <form>
-                        <div className="form-group">
-                            <label >Email address</label>
-                            <input
-                                value={values.email || ''}
-                                onChange={handleChange}
-                                type="email"
-                                name="email"
-                                className="form-control"
-                                placeholder="Example@email.com"
-                                autoComplete="email" />
-                            <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
-                        </div>
-                        <div className="form-group">
-                            <label >Password</label>
-                            <input
-                                value={values.password}
-                                onChange={handleChange}
-                                type="password"
-                                name='password'
-                                className="form-control"
-                                placeholder="Your password"
-                                autoComplete="current-password" />
-                        </div>
-                        <div className="row">
-                            <div onClick={handleRegister} className="btn btn-outline-primary block w-50 mx-auto">Register!</div>
-                        </div>
-                    </form>
-                </div>
+            <div className="col-md-8 text-center border border-primary login-image-col mx-auto">
+                <img src="assets/Register-Avatar.jpeg" className="rounded-circle img-thumbnail border-primary avatar-login-image border" alt="Register Avatar" height="200" width="200" />
+                <form className="col-md-8 mx-auto">
+                    <div className="form-group pt-3">
+                        <input
+                            value={values.email || ''}
+                            onChange={handleChange}
+                            type="email"
+                            name="email"
+                            className="form-control"
+                            placeholder="Email address"
+                        />
+                        <small id="emailHelp" className="form-text text-muted text-left">We'll never share your email with anyone else.</small>
+                    </div>
+                    <div className="form-group">
+                        <input
+                            value={values.password}
+                            onChange={handleChange}
+                            type="password"
+                            name='password'
+                            className="form-control"
+                            placeholder="Password"
+                        />
+                    </div>
+                    <div className="row">
+                        <div onClick={handleRegister} className="btn btn-outline-primary block w-50 mx-auto">Register!</div>
+                    </div>
+                </form>
             </div>
         </main>
     )

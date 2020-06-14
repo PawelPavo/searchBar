@@ -75,10 +75,10 @@ const Login: React.FC<ILoginProps> = () => {
                             placeholder="Your password"
                             autoComplete="current-password" />
                     </div>
-                    <div className="row pb-5">
+                    <div className="row pb-3">
                         <div onClick={login} className="btn btn-outline-primary block w-50 mx-auto">Login!</div>
                     </div>
-                    <small className="text-muted">Don't have an account?</small> <Link to="/register" className="font-weight-light">Sign Up</Link>
+                    <small className="text-muted">Not a Member?</small> <Link to="/register" className="font-weight-light">Create an Account</Link>
                 </form>
                 {
                     error && <div className="alert alert-warning text-center" role="alert">

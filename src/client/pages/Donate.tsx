@@ -80,7 +80,7 @@ const Donate: React.FC<IDonateProps> = props => {
                             <div className="col-md-8">
                                 <div className="card-title my-3 mx-3">
                                     <img
-                                        src={'/chip.png'}
+                                        src={'assets/chip.png'}
                                         className="card-item__chip"
                                     />
                                 </div>

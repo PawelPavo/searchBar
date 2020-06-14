@@ -1,7 +1,6 @@
 import * as express from 'express';
 import sendEmail from '../../utils/mailgun';
 import config from '../../config'
-import cron from '../../utils/cron'
 
 const router = express.Router();
 

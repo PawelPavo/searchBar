@@ -2,7 +2,7 @@ import db from "../../db";
 import { Router } from "express";
 import { ReqUser } from "../../utils/interfaces";
 import { commentBody } from "../../middleware/comments";
-import comments from "../../db/queries/comments";
+import * as passport from "passport";
 
 
 const router = Router();
@@ -29,11 +29,13 @@ router.get('/:id', async (req: ReqUser, res, next) => {
     }
 })
 
-router.post('/', commentBody, async (req: ReqUser, res, next) => {
+router.post('/',passport.authenticate('jwt'), commentBody, async (req: ReqUser, res, next) => {
     const comment = req.body;
+    const userid = req.user.id
     try {
-        const { insertId } = await db.comments.insert(comment.blogid, comment.username, comment.user_comment)
+        const { insertId } = await db.comments.insert(comment.blogid, userid, comment.username, comment.user_comment)
         res.status(201).json({ insertId, msg: 'Comment CREATED' })
+        console.log(req.params)
     } catch (error) {
         console.log({error, msg:'Something wrong in insert route'})
         next(error)

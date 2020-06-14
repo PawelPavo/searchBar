@@ -32,7 +32,7 @@ const Profile: React.FC<IProfileProps> = () => {
                 <div className="row justify-content-center">
                     <div className="col-md-10 shadow-lg profile-image-col">
                         <div className="text-center mb-3">
-                            <img src="/Avatar.jpeg" className="img-fluid shadow-lg avatar-profile-image border rounded border-white" width="175" height="64" />
+                            <img src="/assets/Avatar.jpeg" className="img-fluid shadow-lg avatar-profile-image border rounded border-white" width="175" height="64" />
                         </div>
                         <h2 className=" text-center font-weight-light">Freya Odinson</h2>
                     </div>
