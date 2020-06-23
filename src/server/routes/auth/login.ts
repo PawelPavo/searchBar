@@ -14,7 +14,8 @@ router.post('/', passport.authenticate('local'), async (req: ReqUser, res) => {
         const token = await createToken({userid: userDTO.id, role: userDTO.role });
         res.json({
             token,
-            role: userDTO.role
+            role: userDTO.role,
+            user: userDTO.id
         })
     } catch (error) {
         console.log(error);

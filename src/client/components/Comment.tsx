@@ -7,8 +7,6 @@ import { useState } from 'react';
 import { FaThumbsDown, FaThumbsUp, FaTimes } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
-
-
 const CommentCard: React.SFC<CommentCardProps> = ({ comment }) => {
 
     const [completeModal, toggleCompleteModal] = useModali({

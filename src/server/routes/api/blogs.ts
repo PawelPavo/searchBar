@@ -62,13 +62,11 @@ router.get('/:id',async (req: ReqUser, res, next) => {
     }
 })
 
-
-
 router.post('/' ,passport.authenticate('jwt'), blogBody, async (req: ReqUser, res, next) => {
     const blog = req.body;
     const userid = req.user.id
     try {
-        const {insertId} = await db.blogs.insert(userid, blog.title, blog.content, blog.authorid, blog.image_url)
+        const {insertId} = await db.blogs.insert(userid, blog.title, blog.content, blog.image_url)
         await db.blogTags.insert(insertId, blog.tagid)
         res.status(201).json({msg:'Blog CREATED'})
     } catch (error) {

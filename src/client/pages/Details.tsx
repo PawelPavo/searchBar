@@ -39,6 +39,7 @@ const Details: React.SFC<DetailsProps> = props => {
                     let res = await fetch(`/api/blogs/${blogid}`);
                     let blog = await res.json()
                     setBlog(blog)
+                    // setInterval(blog, 5000)
                 } catch (error) {
                     console.log({ error: 'Can not get the detail info' })
                 }
@@ -46,6 +47,7 @@ const Details: React.SFC<DetailsProps> = props => {
         }
     }, [id]);
 
+    const [username, setUsername] = useState<string>('')
     const [allComments, setAllComments] = useState<IComments[]>([])
 
     useEffect(() => {
@@ -57,7 +59,6 @@ const Details: React.SFC<DetailsProps> = props => {
                     let res = await fetch(`/api/comments/${blogid}`);
                     let allComments = await res.json()
                     setAllComments(allComments)
-                    console.log()
                 } catch (error) {
                     console.log({ error: 'Unable to get comments' })
                 }
@@ -65,7 +66,7 @@ const Details: React.SFC<DetailsProps> = props => {
         }
     }, [id])
 
-    const [username, setUsername] = useState<string>('')
+
     const [user_comment, setComment] = useState<string>('')
     // const [userid, setUserId] = useState<number>(0)
 
@@ -73,13 +74,8 @@ const Details: React.SFC<DetailsProps> = props => {
         e.preventDefault();
         const blogid = id
         try {
-            // await fetch('/api/comments', {
-            //     method: 'POST',
-            //     headers: { "Content-type": "application/json" },
-            //     body: JSON.stringify({ blogid, username, user_comment })
-            // });
-            await apiServices('/api/comments', 'POST', {blogid, username, user_comment })
-            location.reload()
+            await apiServices('/api/comments', 'POST', { blogid, username, user_comment })
+            setComment('')
         } catch (error) {
             console.log(error);
         }
@@ -90,12 +86,8 @@ const Details: React.SFC<DetailsProps> = props => {
             e.preventDefault();
             const blogid = id
             try {
-                await fetch('/api/comments', {
-                    method: 'POST',
-                    headers: { "Content-type": "application/json" },
-                    body: JSON.stringify({ blogid, username, user_comment })
-                });
-                location.reload()
+                await apiServices('/api/comments', 'POST', { blogid, username, user_comment })
+                setComment('')
             } catch (error) {
                 console.log(error);
             }
@@ -125,14 +117,9 @@ const Details: React.SFC<DetailsProps> = props => {
             <section className="row mt-3 justify-content-center mb-5">
                 <div className="col-md-8">
                     <form className="form-group p-3 rounded border-0 bg-light">
-                        <h1>{}</h1>
+                        <h1>{blog.userid}</h1>
                         <div className="col-10 mx-auto">
-                            <input className="form-control mb-3 border-primary border-top-0 border-left-0 border-right-0 bg-light rounded-0"
-                                type="text"
-                                placeholder="Enter your name ..."
-                                value={username}
-                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUsername(e.target.value)}
-                            />
+                            <h6>{username}</h6>
                         </div>
                         <div className="col-10 mx-auto input-group mb-3 mx-auto">
                             <input className="form-control mb-3 border-primary border-top-0 border-left-0 border-right-0 bg-light rounded-0"

@@ -3,7 +3,7 @@ export interface IBlogs {
     title: string;
     content: string;
     image_url?: string;
-    authorid: number;
+    authorid?: number;
     created_at: Date;
     name: string;
     tag_name?: string;
@@ -30,4 +30,19 @@ export interface IComments {
     user_comment?: string;
     created_at?: Date;
     userid?: number
+}
+
+export interface IFood {
+    [key: string]: any;
+    id?:number;
+    image?: string;
+    imageType?: string;
+    title?: string;
+    sourceURL?:string
+}
+
+export interface IUser {
+    id?: number;
+    email?: string;
+    created_at?: Date;
 }

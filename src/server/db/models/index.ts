@@ -3,7 +3,7 @@ export interface BlogsT {
     title: string;
     content: string;
     image_url: string;
-    authorid: number;
+    authorid?: number;
     created_at: Date;
     userid?: number
 };

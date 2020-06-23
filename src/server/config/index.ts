@@ -19,9 +19,12 @@ export default {
         domain: process.env.DOMAIN,
         admin: process.env.ADMIN_EMAIL,
         stripe: process.env.STRIPE,
+        spoonacular: process.env.SPOONACULAR_KEY,
+        spoonacular_user: process.env.SPOONACULAR_USER
     },
     jwt: {
         secret: process.env.JWT_SECRET,
         expires: process.env.JWT_EXPIRES
     }
+
 };

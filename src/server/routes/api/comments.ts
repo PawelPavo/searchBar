@@ -18,11 +18,32 @@ router.get('/', async (req: ReqUser, res, next) => {
     }
 })
 
+router.get('/', async (req: ReqUser, res, next) => {
+    try {
+        const users = await db.users.all()
+        res.json(users);
+    } catch (error) {
+        console.log(error)
+        next(error)
+    }
+})
+
 router.get('/:id', async (req: ReqUser, res, next) => {
     const id = (req.params.id);
     try {
         const comments = await db.comments.allForBlog(id)
         res.json(comments);
+    } catch (error) {
+        console.log(error)
+        next(error)
+    }
+})
+
+router.get('/:id', async (req: ReqUser, res, next) => {
+    const id = Number(req.params.id);
+    try {
+        const users = await db.users.all()
+        res.json(users);
     } catch (error) {
         console.log(error)
         next(error)

@@ -9,16 +9,16 @@ const Home: React.FC<IHomeProps> = () => {
     const { pathname } = useLocation()
     const navbarText = getPathText(pathname)
     const videoRefDiv = useRef(null)
-    useEffect(() => {
-        const script = document.createElement('script');
-        script.src = '//cdn.playwire.com/bolt/js/zeus/embed.js';
-        script.async = true;
-        script.type = 'text/javascript';
-        script.dataset.config = '//config.playwire.com/1006036/videos/v2/3652711/zeus.json?preview=true';
-        script.dataset.height = '75%';
-        script.dataset.width = '75%';
-        videoRefDiv.current.appendChild(script)
-    }, [])
+    // useEffect(() => {
+    //     const script = document.createElement('script');
+    //     script.src = '//cdn.playwire.com/bolt/js/zeus/embed.js';
+    //     script.async = true;
+    //     script.type = 'text/javascript';
+    //     script.dataset.config = '//config.playwire.com/1006036/videos/v2/3652711/zeus.json?preview=true';
+    //     script.dataset.height = '75%';
+    //     script.dataset.width = '75%';
+    //     videoRefDiv.current.appendChild(script)
+    // }, [])
 
 
     return (
@@ -31,7 +31,7 @@ const Home: React.FC<IHomeProps> = () => {
 
             <h2 className="text-center my-4 text-muted">{navbarText}</h2>
             <h1>Playwire ...</h1>
-            <div className="row justify-content-center" ref={videoRefDiv}></div>
+            {/* <div className="row justify-content-center" ref={videoRefDiv}></div> */}
             <h1>Auth Part 1 ...</h1>
             <div className="row justify-content-center">
                 <iframe
@@ -39,7 +39,9 @@ const Home: React.FC<IHomeProps> = () => {
                     width="861"
                     height="434"
                     src="https://www.youtube.com/embed/JPoekuiYhOw?list=PL0hCd0t2dv5Gfl5yR7Q6gCwHu-XR5ASOU"
-                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture">
+                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                    frameBorder="0"
+                    allowFullScreen >
                 </iframe>
             </div>
             <h1>Auth Part 2 ...</h1>
@@ -48,7 +50,9 @@ const Home: React.FC<IHomeProps> = () => {
                     width="861"
                     height="434"
                     src="https://www.youtube.com/embed/Rp-R3sl1Z0Q?list=PL0hCd0t2dv5Gfl5yR7Q6gCwHu-XR5ASOU"
-                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture">
+                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                    frameBorder="0"
+                    allowFullScreen >
                 </iframe>
             </div>
             <h1>Auth Part 3 ...</h1>
@@ -58,7 +62,9 @@ const Home: React.FC<IHomeProps> = () => {
                     width="861"
                     height="434"
                     src="https://www.youtube.com/embed/VO9fOU8pkzs?list=PL0hCd0t2dv5Gfl5yR7Q6gCwHu-XR5ASOU"
-                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture">
+                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                    frameBorder="0"
+                    allowFullScreen >
                 </iframe>
             </div>
             <h1>Looking glass in a search bar</h1>
@@ -67,7 +73,9 @@ const Home: React.FC<IHomeProps> = () => {
                     width="861"
                     height="434"
                     src="https://www.youtube.com/embed/qqeo3_HIEAk?list=PL0hCd0t2dv5Gfl5yR7Q6gCwHu-XR5ASOU"
-                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" >
+                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+                    frameBorder="0"
+                    allowFullScreen >
                 </iframe>
             </div>
         </main>

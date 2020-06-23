@@ -36,7 +36,7 @@ const NewBlog: React.FC<NewBlogProps> = props => {
     const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         try {
-            await apiServices('/api/blogs', 'POST', { title, content, authorid: 3, tagid: newTag, image_url })
+            await apiServices('/api/blogs', 'POST', { title, content, tagid: newTag, image_url })
             history.push('/blog');
         } catch (error) {
             console.log(error);

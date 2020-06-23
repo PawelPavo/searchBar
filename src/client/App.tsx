@@ -19,6 +19,8 @@ import Tags from './pages/Tags'
 const stripePromise = loadStripe('pk_test_MRMivgTfwcT3UfCgH8aCjiqW00AHT65rhC');
 
 const App: React.FC<IAppProps> = () => {
+
+
 	return (
 		<BrowserRouter>
 			<Switch>

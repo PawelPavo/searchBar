@@ -12,8 +12,8 @@ const Login: React.FC<ILoginProps> = () => {
     const navbarText = getPathText(pathname)
     const [error, setError] = React.useState<string>('')
     const [values, setValues] = useState<{ [key: string]: string }>({
-        email: 'NewEmail@newEmail.com',
-        password: 'NewPassword'
+        email: '',
+        password: ''
     })
     useEffect(() => {
         setError(state?.msg)
@@ -62,7 +62,7 @@ const Login: React.FC<ILoginProps> = () => {
                             type="email"
                             name="email"
                             className="form-control"
-                            placeholder="Example@email.com"
+                            placeholder="Enter your emial ..."
                             autoComplete="email" />
                     </div>
                     <div className="form-group">
@@ -72,7 +72,7 @@ const Login: React.FC<ILoginProps> = () => {
                             type="password"
                             name='password'
                             className="form-control"
-                            placeholder="Your password"
+                            placeholder="Password ..."
                             autoComplete="current-password" />
                     </div>
                     <div className="row pb-3">
