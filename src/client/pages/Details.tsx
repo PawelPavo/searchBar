@@ -3,13 +3,11 @@ import Navbah from '../components/Navbah';
 import { FaSmile } from 'react-icons/fa';
 import { useParams, useHistory } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import { IBlogs, IComments } from '../utils/interfaces';
+import { IBlogs, IComments, IUser } from '../utils/interfaces';
 import { useEffect, useState } from 'react';
 import BlogDetailsCard from '../components/BlogDetailsCard'
 import CommentCard from '../components/Comment';
-import 'emoji-mart/css/emoji-mart.css'
-import { Picker } from 'emoji-mart'
-import apiServices from '../utils/api-services';
+import apiServices, { Token } from '../utils/api-services';
 
 
 export interface DetailsProps { }
@@ -26,8 +24,24 @@ const Details: React.SFC<DetailsProps> = props => {
         name: '',
     });
 
+    const [user, setUser] = useState<IUser>({});
     const { id } = useParams();
     const history = useHistory()
+    const [allComments, setAllComments] = useState<IComments[]>([])
+
+    const getComments = React.useCallback(() => {
+        (async () => {
+            let blogid = id;
+            try {
+                let res = await fetch(`/api/comments/${blogid}`);
+                let allComments = await res.json()
+                setAllComments(allComments)
+            } catch (error) {
+                console.log({ error: 'Unable to get comments' })
+            }
+        })()
+    }, []);
+
     useEffect(() => {
         const role = localStorage.getItem('role')
         if (role !== 'guest') {
@@ -39,7 +53,7 @@ const Details: React.SFC<DetailsProps> = props => {
                     let res = await fetch(`/api/blogs/${blogid}`);
                     let blog = await res.json()
                     setBlog(blog)
-                    // setInterval(blog, 5000)
+                    getComments()
                 } catch (error) {
                     console.log({ error: 'Can not get the detail info' })
                 }
@@ -47,35 +61,32 @@ const Details: React.SFC<DetailsProps> = props => {
         }
     }, [id]);
 
-    const [username, setUsername] = useState<string>('')
-    const [allComments, setAllComments] = useState<IComments[]>([])
-
     useEffect(() => {
         const role = localStorage.getItem('role')
-        if (role === 'guest') {
+        if (role !== 'guest') {
+        } else {
             (async () => {
-                let blogid = id;
                 try {
-                    let res = await fetch(`/api/comments/${blogid}`);
-                    let allComments = await res.json()
-                    setAllComments(allComments)
+                    let res = await fetch(`/auth/profile/`, {
+                        headers: { 'Authorization': 'Bearer ' + Token }
+                    });
+                    let user = await res.json();
+                    setUser(user)
                 } catch (error) {
-                    console.log({ error: 'Unable to get comments' })
+                    console.log(error)
                 }
             })()
         }
     }, [id])
 
-
     const [user_comment, setComment] = useState<string>('')
-    // const [userid, setUserId] = useState<number>(0)
-
     const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         const blogid = id
         try {
-            await apiServices('/api/comments', 'POST', { blogid, username, user_comment })
+            await apiServices('/api/comments', 'POST', { blogid, user, user_comment })
             setComment('')
+            getComments()
         } catch (error) {
             console.log(error);
         }
@@ -86,19 +97,15 @@ const Details: React.SFC<DetailsProps> = props => {
             e.preventDefault();
             const blogid = id
             try {
-                await apiServices('/api/comments', 'POST', { blogid, username, user_comment })
+                await apiServices('/api/comments', 'POST', { blogid, user, user_comment })
                 setComment('')
+                getComments()
             } catch (error) {
                 console.log(error);
             }
         }
     }
 
-    const addEmoji = (e: any) => {
-        let emoji = e.native;
-        setComment(user_comment + emoji);
-        console.log(emoji)
-    };
     return (
         <main className="container">
             <Helmet>
@@ -117,9 +124,8 @@ const Details: React.SFC<DetailsProps> = props => {
             <section className="row mt-3 justify-content-center mb-5">
                 <div className="col-md-8">
                     <form className="form-group p-3 rounded border-0 bg-light">
-                        <h1>{blog.userid}</h1>
                         <div className="col-10 mx-auto">
-                            <h6>{username}</h6>
+                            <h6 className="text-start">{user.email}</h6>
                         </div>
                         <div className="col-10 mx-auto input-group mb-3 mx-auto">
                             <input className="form-control mb-3 border-primary border-top-0 border-left-0 border-right-0 bg-light rounded-0"
@@ -137,13 +143,10 @@ const Details: React.SFC<DetailsProps> = props => {
                         </div>
                         <button onClick={handleClick} type="button" className="btn btn-outline-primary btn-lg btn-block mt-3 w-50 mx-auto">Post</button>
                     </form>
-                    {/* <div className="text-center">
-                        <Picker onSelect={addEmoji} />
-                    </div> */}
                 </div>
                 <div className="col-md-6">
                     {allComments.map(comment => (
-                        <CommentCard key={comment.id} comment={comment} />
+                        <CommentCard key={comment.id} comment={comment} getComments={getComments}/>
                     ))}
                 </ div>
             </section>

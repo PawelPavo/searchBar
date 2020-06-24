@@ -54,7 +54,7 @@ router.post('/',passport.authenticate('jwt'), commentBody, async (req: ReqUser, 
     const comment = req.body;
     const userid = req.user.id
     try {
-        const { insertId } = await db.comments.insert(comment.blogid, userid, comment.username, comment.user_comment)
+        const { insertId } = await db.comments.insert(comment.blogid, userid, comment.user_comment)
         res.status(201).json({ insertId, msg: 'Comment CREATED' })
         console.log(req.params)
     } catch (error) {

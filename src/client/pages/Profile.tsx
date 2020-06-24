@@ -4,7 +4,7 @@ import FoodCard from '../components/FoodCard';
 import { useLocation, useHistory } from 'react-router-dom';
 import { getPathText } from '../utils/pathing';
 import { Helmet } from 'react-helmet';
-import { useEffect, useState, useRef, useContext } from 'react';
+import { useEffect, useState } from 'react';
 import { IFood, IUser } from '../utils/interfaces';
 import { Token } from '../utils/api-services'
 
@@ -22,7 +22,6 @@ const Profile: React.FC<IProfileProps> = () => {
             history.push({ pathname: '/login', state: { msg: 'You must be logged in to see this page' } })
         } else {
             (async () => {
-                const id = localStorage.getItem('user')
                 try {
                     let res = await fetch(`/auth/profile/`, {
                         headers: { 'Authorization': 'Bearer ' + Token }
@@ -53,21 +52,6 @@ const Profile: React.FC<IProfileProps> = () => {
         }
     }
 
-    // const testRef = useRef(null)
-    // useEffect(() => {
-    //     if (document.getElementById('food')) {
-    //         const test = document.createTextNode('This is injected with DOM JS')
-    //         testRef.current.appendChild(test)
-    //     } else {
-    //         const test = document.createTextNode('Changed ID')
-    //         testRef.current.appendChild(test)
-    //     }
-    // }, [])
-
-    // const onClick = () => {
-
-    // }
-
     return (
         <>
             <main className="container">
@@ -85,8 +69,6 @@ const Profile: React.FC<IProfileProps> = () => {
                         <h4 className=" text-center font-weight-light">{user.email}</h4>
                     </div>
                 </div>
-                {/* <div>{state}</div> */}
-                {/* <button id="food" ref={testRef} onClick={onClick}></button> */}
                 <div className="input-group mb-3 mt-5">
                     <input
                         className="form-control"

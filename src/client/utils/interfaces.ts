@@ -7,7 +7,7 @@ export interface IBlogs {
     created_at: Date;
     name: string;
     tag_name?: string;
-    tagid?:number;
+    tagid?: number;
     blogid?: number;
     userid?: number
 };
@@ -34,14 +34,15 @@ export interface IComments {
 
 export interface IFood {
     [key: string]: any;
-    id?:number;
+    id?: number;
     image?: string;
     imageType?: string;
     title?: string;
-    sourceURL?:string
+    sourceURL?: string
 }
 
 export interface IUser {
+    [key: string]: any;
     id?: number;
     email?: string;
     created_at?: Date;

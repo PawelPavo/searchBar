@@ -7,7 +7,7 @@ import { useState } from 'react';
 import { FaThumbsDown, FaThumbsUp, FaTimes } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
-const CommentCard: React.SFC<CommentCardProps> = ({ comment }) => {
+const CommentCard: React.SFC<CommentCardProps> = ({ comment, getComments }) => {
 
     const [completeModal, toggleCompleteModal] = useModali({
         animated: true,
@@ -43,7 +43,7 @@ const CommentCard: React.SFC<CommentCardProps> = ({ comment }) => {
             await fetch(`/api/comments/${comment.id}`, {
                 method: 'DELETE'
             });
-            location.reload()
+            getComments()
         } catch (error) {
             console.log(error)
         }
@@ -80,7 +80,8 @@ const CommentCard: React.SFC<CommentCardProps> = ({ comment }) => {
 }
 
 interface CommentCardProps {
-    comment: IComments
+    comment: IComments;
+    getComments: () => void;
 }
 
 export default CommentCard;
