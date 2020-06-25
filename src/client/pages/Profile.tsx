@@ -1,12 +1,13 @@
 import * as React from 'react';
 import Navbah from '../components/Navbah';
 import FoodCard from '../components/FoodCard';
-import { useLocation, useHistory } from 'react-router-dom';
+import { useLocation, useHistory, NavLink } from 'react-router-dom';
 import { getPathText } from '../utils/pathing';
 import { Helmet } from 'react-helmet';
 import { useEffect, useState } from 'react';
 import { IFood, IUser } from '../utils/interfaces';
 import { Token } from '../utils/api-services'
+import { FaFeather } from 'react-icons/fa';
 
 const Profile: React.FC<IProfileProps> = () => {
 
@@ -67,6 +68,7 @@ const Profile: React.FC<IProfileProps> = () => {
                         </div>
                         <h2 className=" text-center font-weight-light">Welcome</h2>
                         <h4 className=" text-center font-weight-light">{user.email}</h4>
+                        <NavLink className="btn border mb-3" exact to="/new"><FaFeather /> Write a Blog</NavLink>
                     </div>
                 </div>
                 <div className="input-group mb-3 mt-5">

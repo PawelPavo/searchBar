@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Navbah from '../../components/Navbah';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useHistory } from 'react-router-dom';
 import { getPathText } from '../../utils/pathing';
 import { Helmet } from 'react-helmet';
 
@@ -9,6 +9,7 @@ const Register: React.FC<IRegisterProps> = (props) => {
     const { pathname } = useLocation()
     const navbarText = getPathText(pathname)
     const [values, setValues] = React.useState<{ [key: string]: string }>({});
+    const history = useHistory();
 
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -28,6 +29,7 @@ const Register: React.FC<IRegisterProps> = (props) => {
             const info = await res.json();
             localStorage.setItem('token', info.token);
             localStorage.setItem('role', info.role);
+            history.push('/profile')
         }
     }
 
@@ -36,10 +38,8 @@ const Register: React.FC<IRegisterProps> = (props) => {
             <Helmet>
                 <title>{navbarText}</title>
             </Helmet>
-
             <Navbah />
             <h2 className="text-center my-4 text-muted">{navbarText}</h2>
-
             <div className="col-md-8 text-center border border-primary login-image-col mx-auto">
                 <img src="assets/Register-Avatar.jpeg" className="rounded-circle img-thumbnail border-primary avatar-login-image border" alt="Register Avatar" height="200" width="200" />
                 <form className="col-md-8 mx-auto">

@@ -17,8 +17,6 @@ const NewBlog: React.FC<NewBlogProps> = props => {
     const [image_url, setImage_url] = useState<string>('')
     const [newTag, setNewTag] = useState('0');
     const [tags, setTags] = useState<ITags[]>([]);
-
-
     const history = useHistory();
 
     useEffect(() => {
@@ -36,7 +34,7 @@ const NewBlog: React.FC<NewBlogProps> = props => {
     const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         try {
-            await apiServices('/api/blogs', 'POST', { title, content, tagid: newTag, image_url })
+            await apiServices('/api/blogs', 'POST', {title, content,tagid: newTag, image_url})
             history.push('/blog');
         } catch (error) {
             console.log(error);

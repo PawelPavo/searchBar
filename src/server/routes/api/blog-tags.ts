@@ -17,8 +17,9 @@ router.get('/', async(req,res, next) => {
 //POST api/blogs
 router.post('/', blogTagBody, async(req, res, next) => {
     const blogTags = req.body;
+    const tagid = blogTags.tagid
     try {
-        const {insertId} = await db.blogTags.insert(blogTags.blogid, blogTags.tagid);
+        const {insertId} = await db.blogTags.insert(blogTags.blogid, tagid);
         res.status(201).json({insertId, msg: 'Blog Inserted'});
     } catch (error) {
         next(error);

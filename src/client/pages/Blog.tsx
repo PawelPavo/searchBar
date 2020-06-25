@@ -40,8 +40,6 @@ const Blogs: React.SFC<BlogsProps> = () => {
           <div className="col-md-4">
             <div className="btn-group-vertical blog-btn">
               <NavLink className="btn btn-block btn-outline-primary btn-lg p-5 text-justify shadow border-0 rounded-bottom bg-light" exact to="/new"><FaFeather /> Write a Blog</NavLink>
-              <br />
-              <Link className="btn btn-block btn-outline-primary btn-lg p-5 text-justify shadow border-0 rounded-top bg-light" to="/register"><FaUserPlus /> Register</Link>
             </div>
           </div>
           <div className="col-md-8">

@@ -10,6 +10,7 @@ const Navbah: React.FC<NavbahProps> = (props) => {
     const [query, setQuery] = React.useState('')
     const [login, setLogin] = React.useState('Login')
     const [loginTextColor, setLoginTextColor] = React.useState('text-primary')
+    const [register, setRegister] = React.useState(true);
 
     useEffect(() => {
         const role = localStorage.getItem('role')
@@ -19,6 +20,7 @@ const Navbah: React.FC<NavbahProps> = (props) => {
         } else {
             setLogin('Logout')
             setLoginTextColor('text-danger border border-danger px-1 font-italic rounded shadow-sm')
+            setRegister(false)
         }
     }, [])
 
@@ -39,6 +41,7 @@ const Navbah: React.FC<NavbahProps> = (props) => {
                         <NavLink exact to="/blog" activeClassName="text-warning"> Blogs </NavLink>
                         <NavLink exact to="/contact" activeClassName="text-warning">  Contact Me </NavLink>
                         <NavLink exact to="/donate" activeClassName="text-warning">  Donate  </NavLink>
+                        {(register) && <NavLink exact to="/register" activeClassName="text-warning">  Register  </NavLink>}
                         <NavLink onClick={handleclick} exact to="/login" className={loginTextColor} activeClassName="text-primary"> {login} </NavLink>
                         <span onClick={() => setShow(!show)} className="text-primary mt-1"> <FaSearch /> </span>
                     </nav>
