@@ -1,6 +1,6 @@
 import * as React from 'react';
+import * as moment from 'moment';
 import Navbah from '../components/Navbah';
-import { FaSmile } from 'react-icons/fa';
 import { useParams, useHistory } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { IBlogs, IComments, IUser } from '../utils/interfaces';
@@ -118,38 +118,40 @@ const Details: React.SFC<DetailsProps> = props => {
             <div className="row justify-content-center">
                 <BlogDetailsCard blogs={blog} />
             </div>
-            <div className="col border border-left-0 border-right-0 border-top-0">
-                <h1 className="text-center font-weight-light">Comments</h1>
-            </div>
-            <section className="row mt-3 justify-content-center mb-5">
-                <div className="col-md-8">
-                    <form className="form-group p-3 rounded border-0 bg-light">
-                        <div className="col-10 mx-auto">
-                            <h6 className="text-start">{user.email}</h6>
-                        </div>
-                        <div className="col-10 mx-auto input-group mb-3 mx-auto">
-                            <input className="form-control mb-3 border-primary border-top-0 border-left-0 border-right-0 bg-light rounded-0"
-                                type="text"
-                                placeholder="Enter your comment ..."
-                                value={user_comment}
-                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setComment(e.target.value)}
-                                onKeyPress={handleKeyPress}
-                            />
-                            <div className="input-group-append">
-                                <a className="btn btn-sm my-auto text-primary">
-                                    <FaSmile />
-                                </a>
-                            </div>
-                        </div>
-                        <button onClick={handleClick} type="button" className="btn btn-outline-primary btn-lg btn-block mt-3 w-50 mx-auto">Post</button>
-                    </form>
+            <div className="sticky-top bg-white">
+                <div className="col border border-left-0 border-right-0 border-top-0 text-center">
+                    <h1 className="text-center font-weight-light">Comments</h1>
                 </div>
+
+                {/* break */}
+                {/* <div className="row row justify-content-center mt-3">
+                <div className="col-md-8">
+                    <h6 className="">{user.email}</h6>
+                </div>
+                </div> */}
+                <div className="row justify-content-center mt-3 sticky-top">
+                    <div className="col-md-6">
+                        <input className="form-control"
+                            type="text"
+                            placeholder="Enter your comment ..."
+                            value={user_comment}
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setComment(e.target.value)}
+                            onKeyPress={handleKeyPress}
+                        />
+                        <div className="row justify-content-end mt-1 mb-3">
+                            <small onClick={handleClick} className="border rounded-pill shadow-sm comment-button-hover p-2 mr-3">Comment</small>
+                        </div>
+                    </div>
+                </div>
+                <div className="col border border-left-0 border-right-0 border-top-0"></div>
+            </div>
+            <div className="row justify-content-center mt-3">
                 <div className="col-md-6">
                     {allComments.map(comment => (
-                        <CommentCard key={comment.id} comment={comment} getComments={getComments}/>
+                        <CommentCard key={comment.id} comment={comment} getComments={getComments} />
                     ))}
-                </ div>
-            </section>
+                </div>
+            </div>
 
         </main>
     )

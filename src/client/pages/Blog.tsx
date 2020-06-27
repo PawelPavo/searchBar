@@ -1,10 +1,9 @@
 import * as React from 'react';
 import Navbah from '../components/Navbah';
 import BlogCard from '../components/BlogCard';
-import { IBlogs } from '../utils/interfaces';
+import { IBlogs, ITags } from '../utils/interfaces';
 import { useState, useEffect } from 'react';
-import { Link, useLocation, NavLink } from 'react-router-dom';
-import { FaFeather, FaUserPlus } from 'react-icons/fa';
+import { useLocation, useHistory } from 'react-router-dom';
 import { getPathText } from '../utils/pathing';
 import { Helmet } from 'react-helmet';
 
@@ -14,42 +13,56 @@ const Blogs: React.SFC<BlogsProps> = () => {
   const { pathname } = useLocation()
   const navbarText = getPathText(pathname)
   const [blogs, setBlogs] = useState<IBlogs[]>([])
+  const [tags, setTags] = useState<ITags[]>([]);
+  const history = useHistory()
 
   useEffect(() => {
     (async () => {
       try {
-        let res = await fetch ('/api/blogs');
+        let res = await fetch('/api/blogs');
         let blogs = await res.json();
         setBlogs(blogs);
+        console.log(blogs[1].id)
       } catch (error) {
         console.log(error)
       }
     })()
   }, []);
 
-  return (
-    <main className="container">
-      <Helmet>
-        <title> All {navbarText}</title>
-      </Helmet>
+  useEffect(() => {
+    (async () => {
+      try {
+        let res = await fetch('/api/tags');
+        let tags = await res.json();
+        setTags(tags);
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+  }, []);
 
-      <Navbah />
-      <div>
-        <h2 className="text-center my-4 text-muted">All {navbarText}</h2>
-        <section className="row mt-3 justify-content-end">
-          <div className="col-md-4">
-            <div className="btn-group-vertical blog-btn">
-              <NavLink className="btn btn-block btn-outline-primary btn-lg p-5 text-justify shadow border-0 rounded-bottom bg-light" exact to="/new"><FaFeather /> Write a Blog</NavLink>
-            </div>
-          </div>
-          <div className="col-md-8">
-            {blogs.map(blog => (
-              <BlogCard key={`blog-${blog.id}`} blog={blog} />
-            ))}
-          </div>
-        </section>
-      </div>
-    </main>
+  return (
+    <>
+      <main className="container">
+        <Helmet>
+          <title> All {navbarText}</title>
+        </Helmet>
+        <Navbah />
+        <div>
+          <h2 className="text-center my-4 text-muted">All {navbarText}</h2>
+        </div>
+        <div className="row justify-content-center mb-4">
+          {tags.map(tag => (
+            < small onClick={() => history.push(`/${tag.id}/tags`)} className="border rounded-pill px-3 py-1 mx-3 shadow-sm blog-button-hover text-muted">{tag.name}</small>
+          ))}
+        </div>
+        <div className="row justify-content-center">
+          {blogs.map(blog => (
+            <BlogCard key={`blog-${blog.id}`} blog={blog} />
+          ))}
+        </div>
+      </main>
+    </>
   )
 }
 

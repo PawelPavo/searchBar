@@ -1,14 +1,14 @@
 import * as React from 'react';
 import * as moment from 'moment';
 import { IBlogs } from '../utils/interfaces';
-import { Link } from 'react-router-dom';
-import { FaEye, FaCommentAlt, FaThumbsDown, FaThumbsUp } from 'react-icons/fa';
+import { useHistory } from 'react-router-dom';
+import { FaComments } from 'react-icons/fa';
 import { urlRegex } from '../utils/url-regex'
 import { useEffect, useState } from 'react';
 
 
 const BlogCard: React.SFC<BlogCardProps> = props => {
-
+    const history = useHistory()
     const [commentCount, setCommentCount] = useState<number>(0)
 
     useEffect(() => {
@@ -23,31 +23,37 @@ const BlogCard: React.SFC<BlogCardProps> = props => {
         })()
     }, [props.blog.id]);
 
-    const [likes, setLikes] = useState<number>(0)
-    const [dislikes, setDislikes] = useState<number>(0)
-
-    const handleLikes = () => {
-        setLikes(likes + 1)
-    }
-
-    const handleDisikes = () => {
-        setDislikes(dislikes + 1)
-    }
-
     return (
         <>
-            <div className="card my-5 shadow border-primary">
-                <div className="row no-gutters">
-                    <div className="col-md-8 ">
+            <div onClick={() => history.push(`/${props.blog.id}/details/${urlRegex(props.blog.title)}`)} className="col-md-5 border border2 m-2">
+                <div className="row my-3">
+                    <div className="col-2 text-right">
+                        <img src={props.blog.image_url} className="" alt="..." style={{ width: "48", height: "48", objectFit: "contain", opacity: "50%" }} />
+                    </div>
+                    <div className="col-8 my-auto">
+                        <h6 className="">{props.blog.title.substring(0, 30)}...</h6>
+                    </div>
+                    <div className="col-2 text-muted my-auto text-right">
+                        <div><FaComments /> {commentCount}</div>
+                    </div>
+                </div>
+                <div className="col mb-3">
+                    <small className="text-monospace text-muted">{props.blog.content.substring(0, 97)}...</small>
+                </div>
+            </div>
 
-                        <Link to={`/${props.blog.tagid}/tags`} className="tag-button btn btn-sm shadow border-rounded bg-primary border-primary">{props.blog.tag_name}</Link>
-
+            {/* <div className="card">
+                <div className="row">
+                    <div className="col">
+                        <div className="col">
+                            <img src={props.blog.image_url} className="card-img img-fluid" alt="..." height="auto" width="64"/>
+                        </div>
+                        <Link to={`/${props.blog.tagid}/tags`} className="btn-sm btn-primary">{props.blog.tag_name}</Link>
                         <div className="card-body ">
-
                             <div className="text-center mb-5">
-                                <Link className="btn btn-outline-primary btn-block mt-3 w-75 mx-auto" to={`/${props.blog.id}/details/${urlRegex(props.blog.title)}`}><FaEye /> View Blog</Link>
+                                <Link className="btn btn-dark btn-block mt-3 w-75 mx-auto rounded-0" to={`/${props.blog.id}/details/${urlRegex(props.blog.title)}`}><FaEye /> View Blog</Link>
                             </div>
-                            <div className=" row justify-content-around">
+                            <div className="row justify-content-around">
                                 <small className="text-muted">Written by: {props.blog.name}</small>
                                 <small className="text-muted">{moment(props.blog.created_at).format('MMM Do YYYY')} </small>
                             </div>
@@ -63,11 +69,8 @@ const BlogCard: React.SFC<BlogCardProps> = props => {
                             </div>
                         </div>
                     </div>
-                    <div className="col-md-4">
-                        <img src={props.blog.image_url} className="card-img image-fluid" alt="..." width="300" height="275" />
-                    </div>
                 </div>
-            </div>
+            </div> */}
         </>
     )
 }

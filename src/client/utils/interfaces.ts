@@ -30,6 +30,7 @@ export interface IComments {
     user_comment?: string;
     created_at?: Date;
     userid?: number
+    image?: string;
 }
 
 export interface IFood {
@@ -46,4 +47,6 @@ export interface IUser {
     id?: number;
     email?: string;
     created_at?: Date;
+    username?: string;
+    profile_url?: string;
 }
