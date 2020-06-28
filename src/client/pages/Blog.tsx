@@ -22,7 +22,6 @@ const Blogs: React.SFC<BlogsProps> = () => {
         let res = await fetch('/api/blogs');
         let blogs = await res.json();
         setBlogs(blogs);
-        console.log(blogs[1].id)
       } catch (error) {
         console.log(error)
       }
@@ -51,9 +50,9 @@ const Blogs: React.SFC<BlogsProps> = () => {
         <div>
           <h2 className="text-center my-4 text-muted">All {navbarText}</h2>
         </div>
-        <div className="row justify-content-center mb-4">
+        <div className="row justify-content-center mb-4 blog-button">
           {tags.map(tag => (
-            < small onClick={() => history.push(`/${tag.id}/tags`)} className="border rounded-pill px-3 py-1 mx-3 shadow-sm blog-button-hover text-muted">{tag.name}</small>
+            < small key={tag.id} onClick={() => history.push(`/${tag.id}/tags`)} className="border rounded-pill px-3 py-1 mx-3 shadow-sm blog-button-hover text-muted text-center">{tag.name}</small>
           ))}
         </div>
         <div className="row justify-content-center">

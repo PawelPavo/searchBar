@@ -38,8 +38,8 @@ const BlogDetailsCard: React.SFC<BlogDetailsCardProps> = ({ blogs }) => {
                     </div>
                 </div>
                 <div className="row justify-content-between mb-5">
-                    <Link className="btn btn-outline-warning btn-block mt-3 w-25 mx-auto shadow" to={`/${blogs.id}/edit/${urlRegex(blogs.title)}`}>Edit</Link>
-                    <Link to="/blog" className="btn btn-outline-primary btn-block mt-3 w-25 mx-auto shadow"> <FaUndo />  All Blogs</Link>
+                    <Link className=" my-auto text-warning btn btn-block mt-3 w-25 mx-auto shadow-sm border rounded-pill blog-button-hover" to={`/${blogs.id}/edit/${urlRegex(blogs.title)}`}>Edit</Link>
+                    <Link to="/blog" className="my-auto text-muted btn btn-block mt-3 w-50 mx-auto shadow-sm border rounded-pill blog-button-hover"> <FaUndo />  All Blogs</Link>
                 </div>
                 <br />
             </div>

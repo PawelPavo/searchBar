@@ -119,18 +119,15 @@ const Details: React.SFC<DetailsProps> = props => {
                 <BlogDetailsCard blogs={blog} />
             </div>
             <div className="sticky-top bg-white">
-                <div className="col border border-left-0 border-right-0 border-top-0 text-center">
-                    <h1 className="text-center font-weight-light">Comments</h1>
-                </div>
-
+                <h1 className="text-center font-weight-light">Comments</h1>
                 {/* break */}
                 {/* <div className="row row justify-content-center mt-3">
                 <div className="col-md-8">
                     <h6 className="">{user.email}</h6>
                 </div>
                 </div> */}
-                <div className="row justify-content-center mt-3 sticky-top">
-                    <div className="col-md-6">
+                <div className="row justify-content-center mt-3 sticky-top bg-light">
+                    <div className="col-md-6 mt-3">
                         <input className="form-control"
                             type="text"
                             placeholder="Enter your comment ..."
@@ -143,7 +140,6 @@ const Details: React.SFC<DetailsProps> = props => {
                         </div>
                     </div>
                 </div>
-                <div className="col border border-left-0 border-right-0 border-top-0"></div>
             </div>
             <div className="row justify-content-center mt-3">
                 <div className="col-md-6">

@@ -50,7 +50,7 @@ const CommentCard: React.SFC<CommentCardProps> = ({ comment, getComments }) => {
 
     return (
         <>
-            <div className="media border my-1 mb-3 ">
+            <div className="media border my-1 mb-3 shadow-sm">
                 <Link to="/profile">
                     <img className="align-self-start mx-1 my-1 rounded-circle" src={comment.image} alt="image" width="auto" height="48" />
                 </Link>
@@ -62,7 +62,7 @@ const CommentCard: React.SFC<CommentCardProps> = ({ comment, getComments }) => {
                             </Link>
                             <small className="text-muted ml-3 font-weight-light">{moment(comment.created_at).format(' MMM Do YYYY')}</small>
                         </div>
-                        <div onClick={toggleCompleteModal} className="delete-comment-hover text-secondary" style={{ cursor: 'pointer',}}>< FaTimes /></div>
+                        <div onClick={toggleCompleteModal} className="delete-comment-hover delete-comment " style={{ cursor: 'pointer',}}>< FaTimes /></div>
                         <Modali.Modal {...completeModal}></Modali.Modal>
                     </div>
                     <div className="col d-flex justify-content-start ml-3">

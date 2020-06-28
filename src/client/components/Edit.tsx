@@ -125,11 +125,19 @@ const Edit: React.FC<IEditProps> = () => {
                         <div className="row justify-content-center mb-5">
                             <small className="text-muted">*Markdown is supported</small>
                         </div>
-                        <div className="row justify-content-around">
-                            <button onClick={toggleCompleteModal} type="button" className="btn btn-outline-danger w-25 shadow"><FaTimes /> Delete</button>
-                            <Modali.Modal {...completeModal}></Modali.Modal>
-                            <NavLink exact to='/blog' className="btn btn-outline-warning w-25 shadow">Cancel</NavLink>
-                            <button onClick={handleClick} type="button" className="btn btn-outline-primary w-25 shadow"><FaCheck /> Submit Changes</button>
+                        <div className="row justify-content-center">
+                            <div className="col-md-6">
+                                <button onClick={handleClick} type="button" className="my-auto text-muted btn btn-block mt-3 w-75 mx-auto shadow-sm border rounded-pill blog-button-hover mb-3"><FaCheck /> Submit</button>
+                                <div className="row mb-5">
+                                    <div className="col-md-6 mt-2 mx-auto text-muted">
+                                        <button onClick={toggleCompleteModal} type="button"style={{opacity:"80%"}}className="my-auto text-danger btn btn-block mt-3 w-50 mx-auto shadow-sm border rounded-pill blog-button-hover"><FaTimes /> Delete</button>
+                                        <Modali.Modal {...completeModal}></Modali.Modal>
+                                    </div>
+                                    <div className="col-md-6 mt-2 mx-auto">
+                                        <NavLink exact to='/blog' className="my-auto text-warning btn btn-block mt-3 w-50 mx-auto shadow-sm border rounded-pill blog-button-hover">Cancel</NavLink>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </form>
                 </div>
