@@ -13,7 +13,7 @@ import Details from './pages/Details';
 import NewBlog from './pages/NewBlog';
 import Register from './pages/auth/Register';
 import Edit from './components/Edit';
-import PrivateRoute from './components/PrivateRoute';
+import PrivateRoute from './components/AuthRoute';
 import Tags from './pages/Tags'
 import Food from './pages/Food'
 
