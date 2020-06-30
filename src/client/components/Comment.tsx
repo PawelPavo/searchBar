@@ -1,3 +1,5 @@
+//@ts-nocheck
+
 import * as React from 'react';
 import * as moment from 'moment';
 import Modali, { useModali } from 'modali';

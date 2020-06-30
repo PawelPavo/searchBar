@@ -6,6 +6,18 @@ import * as passport from 'passport'
 
 const router = Router();
 
+router.get('/user/:id', async (req: ReqUser, res, next) => {
+    const id = req.params.id
+    try {
+        const blogs = await db.blogs.allFromUser(id)
+        res.json(blogs);
+        console.log(req.params)
+    } catch (error) {
+        console.log(error)
+        next(error)
+    }
+})
+
 router.get('/', async (req: ReqUser, res, next) => {
     try {
         const blogs = await db.blogs.all();

@@ -15,6 +15,7 @@ import Register from './pages/auth/Register';
 import Edit from './components/Edit';
 import PrivateRoute from './components/PrivateRoute';
 import Tags from './pages/Tags'
+import Food from './pages/Food'
 
 const stripePromise = loadStripe('pk_test_MRMivgTfwcT3UfCgH8aCjiqW00AHT65rhC');
 
@@ -32,6 +33,9 @@ const App: React.FC<IAppProps> = () => {
 				</Route>
 				<PrivateRoute exact path="/profile">
 					<Profile />
+				</PrivateRoute>
+				<PrivateRoute exact path="/food/:searchFood?">
+					<Food />
 				</PrivateRoute>
 				<Route exact path="/contact">
 					<Contact />

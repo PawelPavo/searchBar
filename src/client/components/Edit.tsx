@@ -1,3 +1,5 @@
+//@ts-nocheck
+
 import * as React from 'react';
 import Swal from 'sweetalert2'
 import Navbah from '../components/Navbah';

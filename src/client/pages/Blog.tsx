@@ -52,10 +52,10 @@ const Blogs: React.SFC<BlogsProps> = () => {
         </div>
         <div className="row justify-content-center mb-4 blog-button">
           {tags.map(tag => (
-            < small key={tag.id} onClick={() => history.push(`/${tag.id}/tags`)} className="border rounded-pill px-3 py-1 mx-3 shadow-sm blog-button-hover text-muted text-center">{tag.name}</small>
+            < small key={tag.id} onClick={() => history.push(`/${tag.id}/tags`)} className="border rounded-pill px-3 py-1 mx-3 shadow-sm blog-button-hover text-center text-muted">{tag.name}</small>
           ))}
         </div>
-        <div className="row justify-content-center">
+        <div className="row justify-content-between">
           {blogs.map(blog => (
             <BlogCard key={`blog-${blog.id}`} blog={blog} />
           ))}

@@ -1,21 +1,20 @@
 import * as React from 'react';
 import Navbah from '../components/Navbah';
-import FoodCard from '../components/FoodCard';
 import { useLocation, useHistory, NavLink } from 'react-router-dom';
 import { getPathText } from '../utils/pathing';
 import { Helmet } from 'react-helmet';
 import { useEffect, useState } from 'react';
-import { IFood, IUser } from '../utils/interfaces';
+import { IUser, IBlogs } from '../utils/interfaces';
 import { Token } from '../utils/api-services'
-import { FaFeather } from 'react-icons/fa';
+import BlogCard from '../components/BlogCard';
 
 const Profile: React.FC<IProfileProps> = () => {
-
 
     const { pathname } = useLocation()
     const navbarText = getPathText(pathname)
     const history = useHistory()
     const [user, setUser] = useState<IUser>({});
+    const [blogs, setBlogs] = useState<IBlogs[]>([])
 
     useEffect(() => {
         const role = localStorage.getItem('role')
@@ -29,29 +28,16 @@ const Profile: React.FC<IProfileProps> = () => {
                     });
                     let user = await res.json();
                     setUser(user)
+                    console.log(user.id)
+                    let resUser= await fetch(`/api/blogs/user/${user.id}`);
+                    let blogs = await resUser.json();
+                    setBlogs(blogs);
                 } catch (error) {
                     console.log(error)
                 }
             })()
         }
     }, [])
-
-    const [food, setFood] = useState<any>('')
-    const [allFoods, setAllFoods] = useState<IFood>([])
-    const [arrayOfFood2, setArrayOfFood2] = useState<IFood>([])
-
-    const getFood = async () => {
-        try {
-            let res = await fetch(`/api/searchFood/${food}`);
-            let allFoods = await res.json()
-            setAllFoods(allFoods)
-            const arrayOfFood = allFoods.products
-            setArrayOfFood2(arrayOfFood)
-            setFood('')
-        } catch (error) {
-            console.log({ error: 'Unable to get foods' })
-        }
-    }
 
     return (
         <>
@@ -62,34 +48,24 @@ const Profile: React.FC<IProfileProps> = () => {
                 <Navbah />
                 <h2 className="text-center my-4 text-muted">{navbarText}</h2>
                 <div className="row justify-content-center">
-                    <div className="col-md-10 shadow-lg profile-image-col">
-                        <div className="text-center mb-3">
+                    <div className="col-md-12 shadow-lg profile-image-col">
+                        <div className="text-center">
                             <img src={user.profile_url} className="img-fluid shadow-lg avatar-profile-image border rounded border-white" width="175" height="64" />
                         </div>
-                        <h2 className=" text-center font-weight-light">Welcome</h2>
-                        <h4 className=" text-center font-weight-light">{user.username}</h4>
-                        <NavLink className="btn border mb-3" exact to="/new"><FaFeather /> Write a Blog</NavLink>
+                        <h4 className="text-center font-weight-light mt-3">{user.username}</h4>
+                        <div className="row justify-content-around mt-5 border py-3 bg-light">
+                            <NavLink className="btn border mb-3 rounded-pill profile-button-hover my-auto shadow-sm" exact to="/new">Write a Blog</NavLink>
+                            <NavLink className="btn border mb-3 rounded-pill profile-button-hover my-auto shadow-sm" exact to="/food">Search for food</NavLink>
+                            <NavLink className="btn border mb-3 rounded-pill profile-button-hover my-auto shadow-sm" exact to="/food">Marvel Search</NavLink>
+                        </div>
+                        <h4 className="text-center mt-5 mb-3">My Blogs</h4>
+                        <div className="row justify-content-between border mb-5 bg-light py-3 px-md-3">
+
+                            {blogs.map(blog => (
+                                <BlogCard key={`blog-${blog.id}`} blog={blog} />
+                            ))}
+                        </div>
                     </div>
-                </div>
-                <div className="input-group mb-3 mt-5">
-                    <input
-                        className="form-control"
-                        placeholder="Enter Food"
-                        aria-describedby="button-addon2"
-                        value={food}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFood(e.target.value)} />
-                    <div className="input-group-append">
-                        <button
-                            className="btn btn-outline-secondary"
-                            type="button"
-                            onClick={getFood}
-                            id="button-addon2">Button</button>
-                    </div>
-                </div>
-                <div className="row justify-content-center" id="test">
-                    {arrayOfFood2.map((food: IFood) => (
-                        <FoodCard key={`blog-${food.id}`} food={food} />
-                    ))}
                 </div>
             </main>
         </>

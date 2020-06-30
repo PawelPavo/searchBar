@@ -25,7 +25,7 @@ const BlogCard: React.SFC<BlogCardProps> = props => {
 
     return (
         <>
-            <div onClick={() => history.push(`/${props.blog.id}/details/${urlRegex(props.blog.title)}`)} className="col-md-5 border border2 m-2">
+            <div onClick={() => history.push(`/${props.blog.id}/details/${urlRegex(props.blog.title)}`)} className="col-md-5 border border2 m-2 bg-white">
                 <div className="row my-3">
                     <div className="col-2 text-right">
                         <img src={props.blog.image_url} className="" alt="..." style={{ width: "48", height: "48", objectFit: "contain", opacity: "50%" }} />
@@ -33,7 +33,7 @@ const BlogCard: React.SFC<BlogCardProps> = props => {
                     <div className="col-8 my-auto">
                         <h6 className="">{props.blog.title.substring(0, 30)}...</h6>
                     </div>
-                    <div className="col-2 text-muted my-auto text-right">
+                    <div className="col-2 my-auto text-right text-primary">
                         <div><FaComments /> {commentCount}</div>
                     </div>
                 </div>

@@ -26,6 +26,8 @@ export const getPathText = (pathname: string): string => {
             return 'Register'
         case '/new':
             return 'New Blog'
+        case '/food':
+            return 'Food Search'
         default:
             return '';
     }
