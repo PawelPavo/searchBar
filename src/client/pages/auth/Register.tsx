@@ -54,6 +54,14 @@ const Register: React.FC<IRegisterProps> = (props) => {
                         />
                         <small id="emailHelp" className="form-text text-muted text-left">We'll never share your email with anyone else.</small>
                     </div>
+                    <input
+                            value={values.username || ''}
+                            onChange={handleChange}
+                            type="email"
+                            name="username"
+                            className="form-control"
+                            placeholder="User Name"
+                        />
                     <div className="form-group">
                         <input
                             value={values.password}
