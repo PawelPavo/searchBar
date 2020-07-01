@@ -8,7 +8,8 @@
     "watch:server": "nodemon dist/server.js",
     "dev": "npm-run-all --parallel watch:*",
     "start": "node dist/server.js",
-    "build": "npx webpack"
+    "build": "npx webpack",
+    "deploy": "git push heroku master"
   },
   "keywords": [],
   "author": "",
