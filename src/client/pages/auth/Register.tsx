@@ -3,6 +3,7 @@ import Navbah from '../../components/Navbah';
 import { useLocation, useHistory } from 'react-router-dom';
 import { getPathText } from '../../utils/pathing';
 import { Helmet } from 'react-helmet';
+import { setStorage } from '../../utils/api-services';
 
 const Register: React.FC<IRegisterProps> = (props) => {
 
@@ -27,8 +28,7 @@ const Register: React.FC<IRegisterProps> = (props) => {
         });
         if (res.ok) {
             const info = await res.json();
-            localStorage.setItem('token', info.token);
-            localStorage.setItem('role', info.role);
+            setStorage(info.token, info.role)
             history.push('/profile')
         }
     }
@@ -64,7 +64,7 @@ const Register: React.FC<IRegisterProps> = (props) => {
                         />
                     <div className="form-group">
                         <input
-                            value={values.password}
+                            value={values.password || ''}
                             onChange={handleChange}
                             type="password"
                             name='password'

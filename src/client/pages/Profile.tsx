@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import { IUser, IBlogs } from '../utils/interfaces';
 import { Token } from '../utils/api-services'
 import BlogCard from '../components/BlogCard';
+import Draggable from "react-draggable";
 
 const Profile: React.FC<IProfileProps> = () => {
 
@@ -28,8 +29,7 @@ const Profile: React.FC<IProfileProps> = () => {
                     });
                     let user = await res.json();
                     setUser(user)
-                    console.log(user.id)
-                    let resUser= await fetch(`/api/blogs/user/${user.id}`);
+                    let resUser = await fetch(`/api/blogs/user/${user.id}`);
                     let blogs = await resUser.json();
                     setBlogs(blogs);
                 } catch (error) {
@@ -58,6 +58,20 @@ const Profile: React.FC<IProfileProps> = () => {
                             <NavLink className="btn border mb-3 rounded-pill profile-button-hover my-auto shadow-sm" exact to="/food">Search for food</NavLink>
                             <NavLink className="btn border mb-3 rounded-pill profile-button-hover my-auto shadow-sm" exact to="/food">Marvel Search</NavLink>
                         </div>
+                        <Draggable
+                            handle=".drag"
+                            defaultPosition={{ x: 0, y: 0 }}
+                            position={null}
+                            grid={[5, 5]}
+                            scale={1}
+                            onStart={this.handleStart}
+                            onDrag={this.handleDrag}
+                            onStop={this.handleStop}>
+                            <div className="col-4 border rounded-lg mt-3 drag bg-light">
+                                <div className="">Test Card</div>
+                                <div>Sample text to test the card and see if it works.</div>
+                            </div>
+                        </Draggable>
                         <h4 className="text-center mt-5 mb-3">My Blogs</h4>
                         <div className="row justify-content-between border mb-5 bg-light py-3 px-md-3">
 
